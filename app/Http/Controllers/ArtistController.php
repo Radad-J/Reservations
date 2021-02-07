@@ -3,17 +3,21 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Artist;
+use Illuminate\Support\Facades\DB;
 
 class ArtistController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        $artists = DB::table('artists')->get();
+
+        return view('artist.index', ['artists' => $artists, 'resource' => 'artistes']);
+
     }
 
     /**
@@ -41,11 +45,14 @@ class ArtistController extends Controller
      * Display the specified resource.
      *
      * @param  int  $id
-     * @return \Illuminate\Http\Response
      */
+
     public function show($id)
     {
-        //
+        $artist = DB::table('artists')->find($id);
+
+        return view('artist.show',['artist' => $artist,]);
+
     }
 
     /**
