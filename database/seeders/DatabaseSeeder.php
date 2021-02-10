@@ -20,5 +20,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             TypesTableSeeder::class,
         ]);
+        $this->call([
+            LocalitiesTableSeeder::class,
+        ]);
     }
 }
