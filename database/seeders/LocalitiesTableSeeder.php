@@ -17,7 +17,7 @@ class LocalitiesTableSeeder extends Seeder
         //Empty the table first
         DB::table('localities')->truncate();
 
-        //Add seeds
+        //Define data
         DB::table('localities')->insert([
             ['postal_code'=>'1070','locality'=>'Belgium, Brussels'],
             ['postal_code'=>'1000','locality'=>'Belgium, Brussels'],

@@ -4,9 +4,6 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Str;
-use App\Models\Artist;
 
 class ArtistsTableSeeder extends Seeder
 {
@@ -18,7 +15,7 @@ class ArtistsTableSeeder extends Seeder
     public function run()
     {
         //Empty the table first
-        Artist::truncate();
+        DB::table('artists')->truncate();
 
         //Define data
         DB::table('artists')->insert([
@@ -36,6 +33,6 @@ class ArtistsTableSeeder extends Seeder
             ['firstname'=>'Pierre','lastname'=>'Wayburn'],
             ['firstname'=>'Gwendoline','lastname'=>'Gauthier'],
         ]);
-        
+
     }
 }
