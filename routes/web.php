@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +32,7 @@ Route::get('artist/{id}', [ArtistController::class, 'show'])->name('show');
 Route::get('type', [TypeController::class, 'index'])->name('index');
 Route::get('type/{id}', [TypeController::class, 'show'])->name('show');
 
+//Locality routes
+Route::get('locality', [LocalityController::class, 'index'])->name('index');
+Route::get('locality/{id}', [LocalityController::class, 'show'])->name('show');
 
