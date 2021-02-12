@@ -23,5 +23,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             LocalitiesTableSeeder::class,
         ]);
+        $this->call([
+            RolesTableSeeder::class,
+        ]);
     }
 }
