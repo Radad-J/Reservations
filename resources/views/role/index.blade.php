@@ -9,12 +9,14 @@
         <thead>
         <tr>
             <th>Role</th>
+            <th>Action</th>
         </tr>
         </thead>
         <tbody>
         @foreach($roles as $role)
             <tr>
                 <td>{{ $role->role }}</td>
+                <td><a href="{{ route('role.show',$role->id) }}">Show</a></td>
             </tr>
         @endforeach
         </tbody>
