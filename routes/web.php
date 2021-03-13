@@ -27,17 +27,17 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Artist routes
 Route::get('artist', [ArtistController::class, 'index'])->name('index');
-Route::get('artist/{id}', [ArtistController::class, 'show'])->name('show');
+Route::get('artist/{id}', [ArtistController::class, 'show'])->name('artist.show');
 
 //Type routes
 Route::get('type', [TypeController::class, 'index'])->name('index');
-Route::get('type/{id}', [TypeController::class, 'show'])->name('show');
+Route::get('type/{id}', [TypeController::class, 'show'])->name('type.show');
 
 //Locality routes
 Route::get('locality', [LocalityController::class, 'index'])->name('index');
-Route::get('locality/{id}', [LocalityController::class, 'show'])->name('show');
+Route::get('locality/{id}', [LocalityController::class, 'show'])->name('locality.show');
 
 //Role routes
 Route::get('role', [RoleController::class, 'index'])->name('index');
-Route::get('role/{id}', [RoleController::class, 'show'])->name('show');
+Route::get('role/{id}', [RoleController::class, 'show'])->name('role.show');
 
