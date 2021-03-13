@@ -6,7 +6,7 @@
         <thead>
             <tr>
                 <th>Type</th>
-                <th>Type</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
