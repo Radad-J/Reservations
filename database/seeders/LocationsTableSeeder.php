@@ -58,8 +58,8 @@ class LocationsTableSeeder extends Seeder
 
         //Modify data in the table
         foreach ($locations as &$location) {
-            $locality = DB::table('localities')->get()->where('postal_code','=', $location['locality_postal_code']);
-            $location['locality_id'] = $locality->first()->id;
+            $locality = Locality::firstWhere('postal_code', $location['locality_postal_code']);
+            $location['locality_id'] = $locality->id;
             $location['slug'] = Str::slug($location['designation']);
             unset($location['locality_postal_code']);
         }
