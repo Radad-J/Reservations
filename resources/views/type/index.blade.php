@@ -6,6 +6,7 @@
         <thead>
             <tr>
                 <th>Type</th>
+                <th>Type</th>
             </tr>
         </thead>
         <tbody>
