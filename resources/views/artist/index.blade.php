@@ -16,6 +16,7 @@
             <tr>
                 <td>{{ $artist->firstname }}</td>
                 <td>{{ $artist->lastname }}</td>
+                <td><a href="{{ route('artist.show',$artist->id) }}">Show</a></td>
             </tr>
         @endforeach
         </tbody>
