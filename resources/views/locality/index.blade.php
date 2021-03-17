@@ -3,13 +3,23 @@
 @section('title', 'Liste des localités')
 
 @section('content')
-    <h1>{{ $locality->postal_code }} {{ $locality->locality }}</h1>
+    <h1>Liste des {{ $resource }}</h1>
 
-    <ul>
-        @foreach($locality->locations as $location)
-            <li>{{ $location->designation }}</li>
+    <table>
+        <thead>
+        <tr>
+            <th>Code Postal</th>
+            <th>Localité</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach($localities as $locality)
+            <tr>
+                <td>{{ $locality->postal_code }}</td>
+                <td>{{ $locality->locality }}</td>
+            </tr>
         @endforeach
-    </ul>
+        </tbody>
+    </table>
 @endsection
-
 
