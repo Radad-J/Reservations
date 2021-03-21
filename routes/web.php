@@ -41,3 +41,4 @@ Route::get('locality/{id}', [LocalityController::class, 'show'])->name('locality
 Route::get('role', [RoleController::class, 'index'])->name('role.index');
 Route::get('role/{id}', [RoleController::class, 'show'])->name('role.show');
 
+

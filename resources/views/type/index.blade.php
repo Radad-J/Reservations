@@ -6,12 +6,14 @@
         <thead>
             <tr>
                 <th>Type</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
             @foreach($types as $type)
                 <tr>
                     <td>{{ $type->type }}</td>
+                    <td><a href="{{ route('type.show',$type->id) }}">Show</a></td>
                 </tr>
             @endforeach
         </tbody>
@@ -19,5 +21,6 @@
 @endsection
 
 <nav><a href="{{ route('type.show',$type->id) }}">Type</a></nav>
+
 
 

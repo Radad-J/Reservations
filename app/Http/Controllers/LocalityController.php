@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Models\Locality;
 class LocalityController extends Controller
 {
     /**
@@ -47,7 +47,7 @@ class LocalityController extends Controller
      */
     public function show($id)
     {
-        $locality = DB::table('localities')->find($id);
+        $locality = Locality::find($id);
         return view('locality.show', ['locality' => $locality, 'resource' => 'localité']);
     }
 
