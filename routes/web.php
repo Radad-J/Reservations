@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\ArtistController;
 use App\Http\Controllers\LocalityController;
+use App\Http\Controllers\RepresentationController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\ShowController;
 use App\Http\Controllers\TypeController;
 use Illuminate\Support\Facades\Route;
 
@@ -40,5 +42,13 @@ Route::get('locality/{id}', [LocalityController::class, 'show'])->name('locality
 //Role routes
 Route::get('role', [RoleController::class, 'index'])->name('role.index');
 Route::get('role/{id}', [RoleController::class, 'show'])->name('role.show');
+
+//Shows routes
+Route::get('show', [ShowController::class, 'index'])->name('show.index');
+Route::get('show/{id}', [ShowController::class, 'show'])->name('show.show');
+
+//Representations routes
+Route::get('representation', [RepresentationController::class, 'index'])->name('representation.index');
+Route::get('representation/{id}', [RepresentationController::class, 'show'])->name('representation.show');
 
 
