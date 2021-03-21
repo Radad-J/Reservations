@@ -15,7 +15,10 @@ class LocationsTableSeeder extends Seeder
      */
     public function run()
     {
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('locations')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
         //Define data
         $locations = [
             [
