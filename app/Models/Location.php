@@ -35,7 +35,7 @@ class Location extends Model
      */
     public function locality()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(Locality::class);
     }
 
     /**
