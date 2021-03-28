@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Show extends Model
 {
     use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -28,12 +29,29 @@ class Show extends Model
      * @var bool
      */
     public $timestamps = false;
+
     /**
      * Get the locality of the location
      */
     public function location()
     {
         return $this->belongsTo(Location::class);
+    }
+
+    /**
+     * Get the representations of the location
+     */
+    public function representations()
+    {
+        return $this->hasMany(Representation::class);
+    }
+
+    /**
+     * Get the performance (artist in a type of collaboration) for the show
+     */
+    public function artistTypes()
+    {
+        return $this->belongsToMany(ArtistType::class);
     }
 
 }

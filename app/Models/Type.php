@@ -9,4 +9,16 @@ class Type extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['type'];
+    protected $table = 'types';
+    public $timestamps = false;
+
+    /**
+     * The artists that are defined by the type.
+     */
+    public function artists()
+    {
+        return $this->belongsToMany(Artist::class);
+    }
+
 }

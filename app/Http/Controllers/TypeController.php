@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Type;
+use App\Models\Type;
 use Illuminate\Support\Facades\DB;
 
 class TypeController extends Controller
@@ -14,7 +14,7 @@ class TypeController extends Controller
      */
     public function index()
     {
-        $types = DB::table('types')->get();
+        $types = Type::all();
         return view('type.index', ['types' => $types, 'resource' => 'types']);
     }
 
@@ -30,7 +30,7 @@ class TypeController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      */
     public function store(Request $request)
     {
@@ -40,18 +40,18 @@ class TypeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      */
     public function show($id)
     {
-        $type = DB::table('types')->find($id);
-        return view('type.show', ['type' => $type, 'resource'=> 'type']);
+        $type = Type::find($id);
+        return view('type.show', ['type' => $type, 'resource' => 'type']);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -62,8 +62,8 @@ class TypeController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -74,7 +74,7 @@ class TypeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

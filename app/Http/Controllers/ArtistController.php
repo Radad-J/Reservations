@@ -14,7 +14,7 @@ class ArtistController extends Controller
      */
     public function index()
     {
-        $artists = DB::table('artists')->get();
+        $artists = Artist::all();
 
         return view('artist.index', ['artists' => $artists, 'resource' => 'artistes']);
 
@@ -33,7 +33,7 @@ class ArtistController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -44,21 +44,21 @@ class ArtistController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      */
 
     public function show($id)
     {
-        $artist = DB::table('artists')->find($id);
+        $artist = Artist::find($id);
 
-        return view('artist.show',['artist' => $artist,]);
+        return view('artist.show', ['artist' => $artist,]);
 
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -69,8 +69,8 @@ class ArtistController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -81,7 +81,7 @@ class ArtistController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)

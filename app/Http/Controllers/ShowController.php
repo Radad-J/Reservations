@@ -2,20 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
+use App\Models\Show;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class RoleController extends Controller
+class ShowController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
-        $roles = Role::all();
-        return view('role.index', ['roles' => $roles, 'resource' => 'roles']);
+        $shows = Show::all();
+
+        return view('show.index', [
+            'shows' => $shows,
+            'resource' => 'show',
+        ]);
     }
 
     /**
@@ -43,12 +47,23 @@ class RoleController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        $role = Role::find($id);
-        return view('role.show', ['role' => $role, 'resource' => 'role']);
+        $show = Show::find($id);
+
+        //Récupérer les artistes du spectacle et les grouper par type
+        $collaborateurs = [];
+
+        foreach ($show->artistTypes as $at) {
+            $collaborateurs[$at->type->type][] = $at->artist;
+        }
+
+        return view('show.show', [
+            'show' => $show,
+            'collaborateurs' => $collaborateurs,
+        ]);
     }
 
     /**
