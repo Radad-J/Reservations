@@ -22,4 +22,12 @@ class Artist extends Model
      */
     protected $table = 'artists';
 
+    /**
+     * The types that belong to the artist.
+     */
+    public function types()
+    {
+        return $this->belongsToMany('App\Type');
+    }
+
 }
