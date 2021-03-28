@@ -20,5 +20,7 @@
     </table>
 @endsection
 
+<nav><a href="{{ route('type.show',$type->id) }}">Type</a></nav>
+
 
 
