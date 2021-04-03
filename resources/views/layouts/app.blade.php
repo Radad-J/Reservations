@@ -18,10 +18,13 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
 </head>
 <body>
+@include('../layouts/header')
     <div class="container">
         @yield('content')
     </div>
+@include('../layouts/footer')
 </body>
 </html>
