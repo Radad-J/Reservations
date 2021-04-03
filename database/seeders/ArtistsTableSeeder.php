@@ -15,7 +15,9 @@ class ArtistsTableSeeder extends Seeder
     public function run()
     {
         //Empty the table first
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('artists')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
 
         //Define data
         DB::table('artists')->insert([

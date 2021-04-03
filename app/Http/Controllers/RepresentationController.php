@@ -2,20 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Role;
+use App\Models\Representation;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
-class RoleController extends Controller
+class RepresentationController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function index()
     {
-        $roles = Role::all();
-        return view('role.index', ['roles' => $roles, 'resource' => 'roles']);
+        $representations = Representation::all();
+
+        return view('representation.index', [
+            'representations' => $representations,
+            'resource' => 'représentations',
+        ]);
     }
 
     /**
@@ -43,12 +48,20 @@ class RoleController extends Controller
      * Display the specified resource.
      *
      * @param int $id
-     * @return \Illuminate\Contracts\View\View
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
     public function show($id)
     {
-        $role = Role::find($id);
-        return view('role.show', ['role' => $role, 'resource' => 'role']);
+        $representation = Representation::find($id);
+        $date = Carbon::parse($representation->when)->format('d/m/Y');
+        $heure = Carbon::parse($representation->when)->format('G:i');
+
+        return view('representation.show', [
+            'representation' => $representation,
+            'resource' => 'représentation',
+            'date' => $date,
+            'heure' => $heure,
+        ]);
     }
 
     /**

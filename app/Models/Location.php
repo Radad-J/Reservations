@@ -35,7 +35,7 @@ class Location extends Model
      */
     public function locality()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(Locality::class);
     }
 
     /**
@@ -44,6 +44,11 @@ class Location extends Model
     public function shows()
     {
         return $this->hasMany(Show::class);
+    }
+
+    public function representations()
+    {
+        return $this->hasMany(Representation::class);
     }
 
 }

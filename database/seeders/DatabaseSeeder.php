@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Representation;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -23,6 +24,12 @@ class DatabaseSeeder extends Seeder
             RolesTableSeeder::class,
             LocationsTableSeeder::class,
             ShowsTableSeeder::class,
+            RepresentationsTableSeeder::class,
+            ArtistTypeTableSeeder::class,
+            ArtistTypeShowTableSeeder::class,
+            UsersTableSeeder::class,
+            RoleUserTableSeeder::class,
+            RepresentationUserTableSeeder::class,
         ]);
 
     }

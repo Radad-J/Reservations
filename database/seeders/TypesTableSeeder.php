@@ -16,13 +16,17 @@ class TypesTableSeeder extends Seeder
     public function run()
     {
         //Empty the table first
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
         DB::table('types')->truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
+
 
         //Define data
         DB::table('types')->insert([
             ['type'=>'acteur'],
             ['type'=>'scénographe'],
             ['type'=>'comédien'],
+            ['type'=>'auteur'],
         ]);
     }
 }
