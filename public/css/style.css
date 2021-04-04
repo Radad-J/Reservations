@@ -1,0 +1,11 @@
+.footer-container {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.container {
+    min-height: calc(100vh - 117px);
+}
+
+.btn-reserver-archive {
+    width: 100%;
+}
