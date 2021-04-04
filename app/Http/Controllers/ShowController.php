@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Location;
 use App\Models\Show;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ShowController extends Controller
 {
@@ -12,8 +15,7 @@ class ShowController extends Controller
      *
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function index()
-    {
+    public function index() {
         $shows = Show::all();
 
         return view('show.index', [
@@ -25,22 +27,53 @@ class ShowController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
+    public function create() {
+        $locations = Location::all('designation');
+
+        return view('show.create', [
+            'locations' => $locations,
+            'resource' => 'show'
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return string
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request): string {
+        // TODO: Error handling
+        $request->validate([
+            'title' => 'required',
+            'price' => 'required|numeric',
+            'description' => 'required',
+            'location' => 'required',
+            'showImage' => 'required|image|mimes:jpeg,png,jpg|max:4092'
+        ]);
+
+        $show               = new Show;
+        $show->slug         = Str::of($request->title)->slug();
+        $show->title        = $request->title;
+        $show->description  = $request->description;
+        $show->location_id  = $request->location;
+        $show->price        = $request->price;
+        $show->bookable     = !empty($request->bookable) && $request->bookable === 'on';
+
+        if ($request->file('showImage')->isValid()) {
+            $show->poster_url = $request->showImage->getClientOriginalName();
+            $request->showImage->move(public_path('images/uploaded-posters'), $request->showImage->getClientOriginalName());
+        } else {
+            return view('show.create', [
+                'resource' => 'show'  // TODO: Add error handling
+            ]);
+        }
+
+        return $show->save()
+            ? redirect()->route('show.index')
+            : view('show.create', ['resource' => 'show']);
     }
 
     /**
@@ -49,8 +82,7 @@ class ShowController extends Controller
      * @param int $id
      * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View|\Illuminate\Http\Response
      */
-    public function show($id)
-    {
+    public function show($id) {
         $show = Show::find($id);
 
         //Récupérer les artistes du spectacle et les grouper par type
@@ -72,8 +104,7 @@ class ShowController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         //
     }
 
@@ -84,8 +115,7 @@ class ShowController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
-    {
+    public function update(Request $request, $id) {
         //
     }
 
@@ -95,8 +125,7 @@ class ShowController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         //
     }
 }
