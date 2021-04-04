@@ -9,14 +9,21 @@
             <a href="{{ route('show.create') }}">Add a show</a>
         </li>
     </ul>
-    
+
+    <!-- Succes notification -->
+    @if(session()->has('message'))
+        <div class="alert alert-success">
+            {{ session()->get('message') }}
+        </div>
+    @endif
+
     <h1>List of {{ $resource }}</h1>
     <div class="row pt-5">
         <div class="col-lg-8 mx-auto">
             <form action="{{ route('show.search') }}" method="GET" role="search">
                 <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
                     <div class="input-group">
-                        <input type="text" name="search" placeholder="What're you searching for?"
+                        <input type="text" name="search" placeholder="What are you searching for ?"
                                aria-describedby="button-addon1"
                                class="form-control border-0 bg-light">
                         <div class="input-group-append">
