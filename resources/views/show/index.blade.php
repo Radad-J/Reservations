@@ -3,19 +3,25 @@
 @section('title', 'Liste des shows')
 
 @section('content')
+    <!-- Menu CRUD -->
+    <ul>
+        <li>
+            <a href="{{ route('show.create') }}">Add a show</a>
+        </li>
+    </ul>
     <h1>Liste des {{ $resource }}</h1>
 
     <ul>
         @foreach($shows as $show)
             <li>
                 {{ $show->title }}
-                @if($show->bookable)
+                @if ($show->bookable)
                     <span>{{ $show->price }} €</span>
                 @endif
 
-                @if($show->representations()->count()==1)
+                @if ($show->representations()->count() === 1)
                     - <span>1 représentation</span>
-                @elseif($show->representations()->count()>1)
+                @elseif ($show->representations()->count()>1)
                     - <span>{{ $show->representations()->count() }} représentations</span>
                 @else
                     - <em>aucune représentation</em>
