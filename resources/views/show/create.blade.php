@@ -51,7 +51,7 @@
                 <label for="showImage">Poster</label>
                 <input type="file" class="form-control-file" id="showImage" name="showImage" aria-describedby="fileHelp">
                 <small id="fileHelp" class="form-text text-muted">Poster should have an extension of .jpg, .jpeg or
-                    .png. Max filezise : 4092mb</small>
+                    .png. Max filesize : 4092mb</small>
             </div>
         </fieldset>
         <button type="submit" class="btn btn-primary">Ajouter</button>
