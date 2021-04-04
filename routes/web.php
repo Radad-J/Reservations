@@ -6,6 +6,7 @@ use App\Http\Controllers\RepresentationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\TypeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -45,10 +46,10 @@ Route::get('role/{id}', [RoleController::class, 'show'])->name('role.show');
 
 //Shows routes
 Route::get('show', [ShowController::class, 'index'])->name('show.index');
-Route::get('show/{id}', [ShowController::class, 'show'])->name('show.show');
+Route::get('show/{id}', [ShowController::class, 'show'])->where('id', '[0-9]+')->name('show.show');
+Route::get('show/create', [ShowController::class, 'create'])->name('show.create');
+Route::put('show/store', [ShowController::class, 'store'])->name('show.store');
 
 //Representations routes
 Route::get('representation', [RepresentationController::class, 'index'])->name('representation.index');
 Route::get('representation/{id}', [RepresentationController::class, 'show'])->name('representation.show');
-
-
