@@ -6,7 +6,6 @@ use App\Models\Location;
 use App\Models\Show;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use Symfony\Component\String\Slugger\SluggerInterface;
 
 class ShowController extends Controller
 {
@@ -63,8 +62,10 @@ class ShowController extends Controller
         $show->bookable     = !empty($request->bookable) && $request->bookable === 'on';
 
         if ($request->file('showImage')->isValid()) {
-            $show->poster_url = $request->showImage->getClientOriginalName();
-            $request->showImage->move(public_path('images/uploaded-posters'), $request->showImage->getClientOriginalName());
+            // Rewrite image's name to avoid duplicates
+            $imageName = Str::random(15) . '.' . $request->showImage->extension();
+            $show->poster_url = $imageName;
+            $request->showImage->move(public_path('images/uploaded-posters'), $imageName);
         } else {
             return view('show.create', [
                 'resource' => 'show'  // TODO: Add error handling
@@ -72,7 +73,7 @@ class ShowController extends Controller
         }
 
         return $show->save()
-            ? redirect()->route('show.index')
+            ? redirect()->route('show.index')->with('message', 'Show has been added !')
             : view('show.create', ['resource' => 'show']);
     }
 
