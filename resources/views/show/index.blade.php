@@ -43,9 +43,9 @@
                             @endif
                         </h4>
                         <p class="card-text">
-                            @if($show->representations()->count()==1)
+                            @if ($show->representations()->count() === 1)
                                 - <span>1 représentation</span>
-                            @elseif($show->representations()->count()>1)
+                            @elseif ($show->representations()->count() > 1)
                                 - <span>{{ $show->representations()->count() }} représentations</span>
                             @else
                                 - <em>Aucune représentation</em>
