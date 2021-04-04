@@ -3,6 +3,14 @@
 @section('title', 'Liste des shows')
 
 @section('content')
+    <!-- Menu CRUD -->
+    <ul>
+        <li>
+            <a href="{{ route('show.create') }}">Add a show</a>
+        </li>
+    </ul>
+    
+    <h1>List of {{ $resource }}</h1>
     <div class="row pt-5">
         <div class="col-lg-8 mx-auto">
             <form action="{{ route('show.search') }}" method="GET" role="search">
