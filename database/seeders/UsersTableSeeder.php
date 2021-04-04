@@ -41,6 +41,7 @@ class UsersTableSeeder extends Seeder
 
             DB::table('users')->insert([
                 'login' => $user['login'],
+                'name' => $user['name'],
                 'password' => $user['password'],
                 'firstname' => $user['firstname'],
                 'lastname' => $user['lastname'],

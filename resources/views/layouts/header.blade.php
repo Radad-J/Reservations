@@ -31,6 +31,21 @@
                 </div>
             </li>
         </ul>
+        <ul class="navbar-nav ml-auto">
+            @if(Auth::user())
+                <li class="nav-item">
+                    <form method="POST" action="/logout">
+                        @csrf
+                        <button type="submit" class="btn">Déconnexion</button>
+            @else
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('login') }}">Me connecter</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
+                </li>
+            @endif
+        </ul>
         <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
