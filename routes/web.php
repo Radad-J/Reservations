@@ -30,26 +30,27 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 //Artist routes
 Route::get('artist', [ArtistController::class, 'index'])->name('artist.index');
-Route::get('artist/{id}', [ArtistController::class, 'show'])->name('artist.show');
+Route::get('artist/{id}', [ArtistController::class, 'show'])->where('id', '[0-9]+')->name('artist.show');
 
 //Type routes
 Route::get('type', [TypeController::class, 'index'])->name('type.index');
-Route::get('type/{id}', [TypeController::class, 'show'])->name('type.show');
+Route::get('type/{id}', [TypeController::class, 'show'])->where('id', '[0-9]+')->name('type.show');
 
 //Locality routes
 Route::get('locality', [LocalityController::class, 'index'])->name('locality.index');
-Route::get('locality/{id}', [LocalityController::class, 'show'])->name('locality.show');
+Route::get('locality/{id}', [LocalityController::class, 'show'])->where('id', '[0-9]+')->name('locality.show');
 
 //Role routes
 Route::get('role', [RoleController::class, 'index'])->name('role.index');
-Route::get('role/{id}', [RoleController::class, 'show'])->name('role.show');
+Route::get('role/{id}', [RoleController::class, 'show'])->where('id', '[0-9]+')->name('role.show');
 
 //Shows routes
 Route::get('show', [ShowController::class, 'index'])->name('show.index');
 Route::get('show/{id}', [ShowController::class, 'show'])->where('id', '[0-9]+')->name('show.show');
 Route::get('show/create', [ShowController::class, 'create'])->name('show.create');
 Route::put('show/store', [ShowController::class, 'store'])->name('show.store');
+Route::get('show/search', [ShowController::class, 'search'])->name('show.search');
 
 //Representations routes
 Route::get('representation', [RepresentationController::class, 'index'])->name('representation.index');
-Route::get('representation/{id}', [RepresentationController::class, 'show'])->name('representation.show');
+Route::get('representation/{id}', [RepresentationController::class, 'show'])->where('id', '[0-9]+')->name('representation.show');
