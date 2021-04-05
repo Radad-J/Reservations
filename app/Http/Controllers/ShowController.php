@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Location;
 use App\Models\Show;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -63,7 +64,7 @@ class ShowController extends Controller
 
         if ($request->file('showImage')->isValid()) {
             // Rewrite image's name to avoid duplicates
-            $imageName = Str::random(15) . '.' . $request->showImage->extension();
+            $imageName = Carbon::now()->timestamp . '.' . $request->showImage->extension();
             $show->poster_url = $imageName;
             $request->showImage->move(public_path('images/uploaded-posters'), $imageName);
         } else {
