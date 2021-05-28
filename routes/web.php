@@ -6,6 +6,7 @@ use App\Http\Controllers\RepresentationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\TypeController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -54,3 +55,6 @@ Route::get('show/search', [ShowController::class, 'search'])->name('show.search'
 //Representations routes
 Route::get('representation', [RepresentationController::class, 'index'])->name('representation.index');
 Route::get('representation/{id}', [RepresentationController::class, 'show'])->where('id', '[0-9]+')->name('representation.show');
+
+//User routes
+Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')->name('user.show');

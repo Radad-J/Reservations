@@ -18,6 +18,12 @@ class UpdateUsersTable extends Migration
             $table->string('firstname', 60);
             $table->string('lastname', 60);
             $table->string('language', 2);
+
+            $table->dropColumn('name');
+            $table->dropColumn('email_verified_at');
+            $table->dropColumn('remember_token');
+            /*$table->dropColumn('created_at');
+            $table->dropColumn('updated_at');*/
         });
     }
 
@@ -28,6 +34,13 @@ class UpdateUsersTable extends Migration
      */
     public function down()
     {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('login');
+            $table->dropColumn('firstname');
+            $table->dropColumn('lastname');
+            $table->dropColumn('language');
+        });
+
         Schema::dropIfExists('users');
     }
 }
