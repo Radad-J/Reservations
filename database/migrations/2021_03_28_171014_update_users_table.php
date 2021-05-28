@@ -21,8 +21,8 @@ class UpdateUsersTable extends Migration
 
             $table->dropColumn('name');
             $table->dropColumn('email_verified_at');
-            /*$table->dropColumn('remember_token');
-            $table->dropColumn('created_at');
+            $table->dropColumn('remember_token');
+            /*$table->dropColumn('created_at');
             $table->dropColumn('updated_at');*/
         });
     }
