@@ -36,9 +36,14 @@
         <ul class="navbar-nav ml-auto">
             @if(Auth::user())
                 <li class="nav-item">
+                    <a class="nav-link" href="{{ route('user.show', Auth::id())}}">Profile</a>
+                </li>
+                <li class="nav-item">
                     <form method="POST" action="/logout">
                         @csrf
                         <button type="submit" class="btn">Déconnexion</button>
+                    </form>
+                </li>
             @else
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('login') }}">Me connecter</a>
