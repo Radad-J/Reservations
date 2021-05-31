@@ -18,29 +18,29 @@ class RepresentationUserTableSeeder extends Seeder
     {
         $representationsUsers = [
             [
-                'user_login' => 'bob123',
+                'user_email' => 'bob@sull.com',
                 'representation_id' => 2,
                 'places' => 5,
             ],
             [
-                'user_login' => 'john123',
+                'user_email' => 'john@doe.com',
                 'representation_id' => 2,
                 'places' => 1,
             ],
             [
-                'user_login' => 'john123',
+                'user_email' => 'john@doe.com',
                 'representation_id' => 3,
                 'places' => 4,
             ],
             [
-                'user_login' => 'bob123',
+                'user_email' => 'bob@sull.com',
                 'representation_id' => 1,
                 'places' => 2,
             ],
         ];
 
         foreach ($representationsUsers as $representationsUser) {
-            $user = User::firstWhere('login', $representationsUser['user_login']);
+            $user = User::firstWhere('email', $representationsUser['user_email']);
 
             DB::table('representation_user')->insert([
                 'user_id' => $user->id,
