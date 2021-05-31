@@ -9,6 +9,18 @@ class Locality extends Model
 {
     use HasFactory;
 
+    public $timestamps = false;
+
+    /**
+     * The attributes that are mass assignable.
+     *
+     * @var array
+     */
+    protected $fillable = [
+        'postal_code',
+        'locality'
+    ];
+
     /**
      * Get the locations for the locality.
      */
