@@ -58,3 +58,8 @@ Route::get('representation/{id}', [RepresentationController::class, 'show'])->wh
 
 //User routes
 Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')->name('user.show');
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
