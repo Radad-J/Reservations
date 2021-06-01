@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends \TCG\Voyager\Models\User
 {
     use HasFactory, Notifiable;
 
@@ -17,11 +17,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'login',
-        'firstname',
-        'lastname',
-        'language',
         'name',
+        'language',
         'email',
         'password',
     ];
@@ -45,9 +42,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function roles () {
+    /*public function roles () {
         return $this->belongsToMany(Role::class);
-    }
+    }*/
 
     public function representation () {
         return $this->belongsToMany(Representation::class);

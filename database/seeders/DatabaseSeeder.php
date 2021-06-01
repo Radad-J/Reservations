@@ -21,14 +21,12 @@ class DatabaseSeeder extends Seeder
             ArtistsTableSeeder::class,
             TypesTableSeeder::class,
             LocalitiesTableSeeder::class,
-            RolesTableSeeder::class,
             LocationsTableSeeder::class,
             ShowsTableSeeder::class,
             RepresentationsTableSeeder::class,
             ArtistTypeTableSeeder::class,
             ArtistTypeShowTableSeeder::class,
             UsersTableSeeder::class,
-            RoleUserTableSeeder::class,
             RepresentationUserTableSeeder::class,
         ]);
 
