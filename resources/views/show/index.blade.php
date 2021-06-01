@@ -42,7 +42,7 @@
                 <div class="card border-secondary d-flex mx-auto mb-3" style="max-width: 20rem;">
                     <div>
                         @if($show->poster_url)
-                            <img class="text-center" src="{{ asset('/images/'.$show->poster_url) }}"
+                            <img class="text-center" src="{{ asset('/storage/'.$show->poster_url) }}"
                                  alt="{{ $show->title }}" width="260" height="380">
                         @else
                             <canvas width="200" height="400" style="border:1px solid #000000;"></canvas>
