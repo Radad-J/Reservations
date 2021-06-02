@@ -36,20 +36,20 @@
         <ul class="navbar-nav ml-auto">
             @if(Auth::user())
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('voyager.profile')}}">Profile</a>
+                    <a class="nav-link" href="{{ route('user.show', Auth::id())}}">Profile</a>
                 </li>
                 <li class="nav-item">
                     <form method="POST" action="/logout">
                         @csrf
-                        <button type="submit" class="btn">Déconnexion</button>
+                        <button type="submit" class="btn">Logout</button>
                     </form>
                 </li>
             @else
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Me connecter</a>
+                    <a class="nav-link" href="{{ route('login') }}">Log in</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
+                    <a class="nav-link" href="{{ route('register') }}">Sign up</a>
                 </li>
             @endif
         </ul>

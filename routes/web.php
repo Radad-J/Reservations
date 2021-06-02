@@ -63,3 +63,6 @@ Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+//Route des flux Russ
+Route::feeds();
