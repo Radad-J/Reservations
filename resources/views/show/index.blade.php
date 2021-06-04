@@ -3,13 +3,6 @@
 @section('title', 'Liste des shows')
 
 @section('content')
-    <!-- Menu CRUD -->
-    <ul>
-        <li>
-            <a href="{{ route('show.create') }}">Add a show</a>
-        </li>
-    </ul>
-
     <!-- Success notification -->
     @if(session()->has('message'))
         <div class="alert alert-success">
