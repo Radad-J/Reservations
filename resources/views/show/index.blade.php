@@ -25,6 +25,9 @@
     @endif
 
     <h1>List of {{ $resource }}</h1>
+    <h6><a href="{{ route('show.excel') }}">Download Shows list as an Excel File</a></h6>
+    <h6><a href="{{ route('show.csv') }}">Download Shows list as a CSV File</a></h6>
+    <h6><a href="{{ route('show.import') }}">Import your shows</a></h6>
     <div class="row pt-5">
         <div class="col-lg-8 mx-auto">
             <form action="{{ route('show.search') }}" method="GET" role="search">

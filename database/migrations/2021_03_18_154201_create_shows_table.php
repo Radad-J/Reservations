@@ -15,12 +15,12 @@ class CreateShowsTable extends Migration
     {
         Schema::create('shows', function (Blueprint $table) {
             $table->id();
-            $table->string('slug',60)->unique();
+            $table->string('slug',60)->nullable();
             $table->string('title',255);
             $table->text('description');
-            $table->string('poster_url',255);
-            $table->foreignId('location_id');
-            $table->boolean('bookable');
+            $table->string('poster_url',255)->nullable();
+            $table->foreignId('location_id')->nullable();
+            $table->boolean('bookable')->default(1);
 
             $table->decimal('price',$precision = 10, $scale = 2);
 

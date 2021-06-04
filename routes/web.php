@@ -54,6 +54,10 @@ Route::get('show/{id}', [ShowController::class, 'show'])->where('id', '[0-9]+')-
 Route::get('show/create', [ShowController::class, 'create'])->name('show.create');
 Route::put('show/store', [ShowController::class, 'store'])->name('show.store');
 Route::get('show/search', [ShowController::class, 'search'])->name('show.search');
+Route::get('/show/export-to-excel', [ShowController::class, 'exportToExcel'])->name('show.excel');
+Route::get('/show/export-to-csv', [ShowController::class, 'exportToCSV'])->name('show.csv');
+Route::get('/show/import', [ShowController::class, 'importForm'])->name('show.import');
+Route::post('/show/import-handler', [ShowController::class, 'importShows'])->name('show.importHandler');
 
 //Representations routes
 Route::get('representation', [RepresentationController::class, 'index'])->name('representation.index');
