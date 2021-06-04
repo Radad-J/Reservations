@@ -1,9 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01"
-            aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
+    <!-- Cart link w/ item count-->
+    <div class="col-4 pt-1">
+        <a href="{{ route('cart.index') }}" class="text-white">Cart <span class="badge badge-pill badge-dark">{{ Cart::count() }}</span></a>
+    </div>
 
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
@@ -36,20 +35,20 @@
         <ul class="navbar-nav ml-auto">
             @if(Auth::user())
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('voyager.profile')}}">Profile</a>
+                    <a class="nav-link" href="{{ route('user.show', Auth::id())}}">Profile</a>
                 </li>
                 <li class="nav-item">
                     <form method="POST" action="/logout">
                         @csrf
-                        <button type="submit" class="btn">Déconnexion</button>
+                        <button type="submit" class="btn">Logout</button>
                     </form>
                 </li>
             @else
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('login') }}">Me connecter</a>
+                    <a class="nav-link" href="{{ route('login') }}">Log in</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('register') }}">S'inscrire</a>
+                    <a class="nav-link" href="{{ route('register') }}">Sign up</a>
                 </li>
             @endif
         </ul>
