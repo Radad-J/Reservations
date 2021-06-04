@@ -25,7 +25,7 @@
 
 @section('payment-script')
     <script>
-        var stripe = Stripe("pk_test_51IyJSABA7hi49VSriLkfjTBPFMn6j7edEfzhKQO4X6fOCb6GJmJ4T6LeBesMVe5KmOqvzlVMdXU4ybCdb2VWYCSz00MzcgoCPg");
+        var stripe = Stripe("{{ env('STRIPE_PUB_KEY') }}");
         var elements = stripe.elements();
     </script>
 @endsection
