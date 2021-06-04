@@ -14,17 +14,22 @@
         @endif
 
         @if($show->description)
-            <p><strong>Description:</strong> {{ $show->description }}</p>
+            <p><strong>Description :</strong> {{ $show->description }}</p>
         @endif
 
         @if($show->location)
-            <p><strong>Lieu de création:</strong> {{ $show->location->designation }}</p>
+            <p><strong>Lieu de diffusion :</strong> {{ $show->location->designation }}</p>
         @endif
 
-        <p><strong>Prix:</strong> {{ $show->price }} €</p>
+        <p><strong>Prix :</strong> {{ $show->price }} €</p>
 
         @if($show->bookable)
-            <p><em>Réservable</em></p>
+            <form action="{{ route('cart.store') }}" method="post">
+                @csrf
+
+                <input type="hidden" name="show_id" value="{{ $show->id }}">
+                <button type="submit" class="btn btn-outline-success">Réserver une place</button>
+            </form>
         @else
             <p><em>Non réservable</em></p>
         @endif
