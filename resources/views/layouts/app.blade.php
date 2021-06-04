@@ -16,10 +16,15 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
+    <!-- Placeholder for Stripe's security script checkout@index.black.php-->
+    @yield('payment-script')
+
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
+    @include('feed::links')
+
 </head>
 <body>
 @include('../layouts/header')
@@ -27,5 +32,6 @@
         @yield('content')
     </div>
 @include('../layouts/footer')
+@yield('payment-js')
 </body>
 </html>

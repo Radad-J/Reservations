@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\ArtistController;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\LocalityController;
 use App\Http\Controllers\RepresentationController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -63,3 +66,16 @@ Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+//Route des flux Russ
+Route::feeds();
+
+/* Cart Routes */
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add', [CartController::class, 'store'])->name('cart.store');
+Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove'])->name('cart.remove');
+Route::delete('/cart/empty', [CartController::class, 'destroy'])->name('cart.empty');
+
+/* Checkout Routes */
+Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
+Route::post('/charge', [CheckoutController::class, 'charge'])->name('checkout.charge');

@@ -10,10 +10,24 @@
         </li>
     </ul>
 
-    <!-- Succes notification -->
+    <!-- Success notification -->
     @if(session()->has('message'))
         <div class="alert alert-success">
             {{ session()->get('message') }}
+        </div>
+    @endif
+
+    <!-- Place added to cart notification -->
+    @if(session()->has('success'))
+        <div class="alert alert-success">
+            {{ session()->get('success') }}
+        </div>
+    @endif
+
+    <!-- No more place available notification -->
+    @if(session()->has('errror'))
+        <div class="alert alert-error">
+            {{ sessions()->get('error') }}
         </div>
     @endif
 
@@ -67,7 +81,7 @@
                             @endif
                         </p>
                         <a href="{{ route('show.show', $show->id) }}" target="_blank" type="button"
-                           class="btn btn-reserver-archive btn-outline-primary">Réserver</a>
+                           class="btn btn-reserver-archive btn-outline-primary">En savoir plus</a>
                     </div>
                 </div>
             @endforeach

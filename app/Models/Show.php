@@ -28,7 +28,7 @@ class Show extends Model
      *
      * @var bool
      */
-    public $timestamps = false;
+    public $timestamps = true;
 
     /**
      * Get the locality of the location
