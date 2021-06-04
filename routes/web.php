@@ -83,3 +83,4 @@ Route::delete('/cart/empty', [CartController::class, 'destroy'])->name('cart.emp
 /* Checkout Routes */
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/charge', [CheckoutController::class, 'charge'])->name('checkout.charge');
+
