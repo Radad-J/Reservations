@@ -52,7 +52,7 @@
                 <div class="card border-secondary d-flex mx-auto mb-3" style="max-width: 20rem;">
                     <div>
                         @if($show->poster_url)
-                            <img class="text-center" src="{{ asset('/storage/'.$show->poster_url) }}"
+                            <img class="text-center" src="{{ asset('/storage/'. $show->poster_url) }}"
                                  alt="{{ $show->title }}" width="260" height="380">
                         @else
                             <canvas width="200" height="400" style="border:1px solid #000000;"></canvas>
@@ -76,7 +76,7 @@
                                 - <em>Aucune représentation</em>
                             @endif
                         </p>
-                        <a href="{{ route('show.show', $show->id) }}" target="_blank" type="button"
+                        <a href="{{ route('show.show', $show->id) }}" type="button"
                            class="btn btn-reserver-archive btn-outline-primary">En savoir plus</a>
                     </div>
                 </div>
