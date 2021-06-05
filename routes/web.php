@@ -9,7 +9,6 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
-use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -83,3 +82,5 @@ Route::delete('/cart/empty', [CartController::class, 'destroy'])->name('cart.emp
 /* Checkout Routes */
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/charge', [CheckoutController::class, 'charge'])->name('checkout.charge');
+
+/* Login Route */
