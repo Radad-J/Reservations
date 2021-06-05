@@ -41,7 +41,7 @@ class CartController extends Controller
 
         // Make sure the show is bookable
         if ($show->bookable) {
-            Cart::add($show->id, $show->title, 1, $show->price, [
+            Cart::add($show->id, $show->title, $request->order_quantity, $show->price, [
                 'representation_id' => $request->representation_id,
                 'theatre'           => $representationInfo->first()->designation,
                 'date'              => $dateAndTime['date'],
@@ -65,20 +65,6 @@ class CartController extends Controller
         Cart::remove($request->rowId);
 
         return back()->with('success', 'The item has been removed.');
-    }
-
-    /**
-     * removeOne method.
-     * Remove a single instance of an item from the cart
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function removeOne(Request $request): RedirectResponse
-    {
-        $updatedQuantity = Cart::get($request->rowId)->qty - 1;
-        Cart::update($request->rowId, $updatedQuantity);
-
-        return back()->with('success', 'One place has been removed.');
     }
 
     /**
