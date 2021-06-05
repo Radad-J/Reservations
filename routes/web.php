@@ -78,7 +78,6 @@ Route::feeds();
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add', [CartController::class, 'store'])->name('cart.store');
 Route::delete('/cart/remove/{rowId}', [CartController::class, 'remove'])->name('cart.remove');
-Route::delete('/cart/removeOne/{rowId}', [CartController::class, 'removeOne'])->name('cart.removeOne');
 Route::delete('/cart/empty', [CartController::class, 'destroy'])->name('cart.empty');
 
 /* Checkout Routes */
