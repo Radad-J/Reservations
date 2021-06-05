@@ -7,6 +7,9 @@ use App\Models\Show;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+use Symfony\Component\Console\Input\Input;
 
 /**
  * Class CartController
@@ -38,6 +41,11 @@ class CartController extends Controller
         // Get infos of the representation
         $representationInfo = Representation::getRepresentationInfo($request->representation_id);
         $dateAndTime = Representation::getDateAndTime($representationInfo->first()->when);
+
+        // Check if user is not logged in
+        if (!Auth::check()) {
+            return redirect()->route('login')->with('error', 'Please log in before making a purchase.');
+        }
 
         // Make sure the show is bookable
         if ($show->bookable) {
