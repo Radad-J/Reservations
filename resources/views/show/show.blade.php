@@ -23,7 +23,7 @@
 
         <p><strong>Prix :</strong> {{ $show->price }} €</p>
 
-        @if($show->bookable)
+        @if($show->bookable && $show->representations->count() > 0)
             <form action="{{ route('cart.store') }}" method="post">
                 @csrf
 
