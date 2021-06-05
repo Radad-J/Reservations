@@ -65,7 +65,7 @@ Route::get('representation/{id}', [RepresentationController::class, 'show'])->wh
 //User routes
 Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')->name('user.show');
 
-
+//Voyager routes
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
@@ -82,5 +82,3 @@ Route::delete('/cart/empty', [CartController::class, 'destroy'])->name('cart.emp
 /* Checkout Routes */
 Route::get('/checkout', [CheckoutController::class, 'index'])->name('checkout.index');
 Route::post('/charge', [CheckoutController::class, 'charge'])->name('checkout.charge');
-
-/* Login Route */
