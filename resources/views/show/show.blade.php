@@ -26,8 +26,13 @@
         @if($show->bookable && $show->representations->count() > 0)
             <form action="{{ route('cart.store') }}" method="post">
                 @csrf
-
                 <input type="hidden" name="show_id" value="{{ $show->id }}">
+                <label for="representation"></label>
+                <select name="representation_id" id="representation_id">
+                    @foreach($show->representations as $representation)
+                        <option value="{{ $representation->id }}">{{ $representation->when }}</option>
+                    @endforeach
+                </select>
                 <button type="submit" class="btn btn-outline-success">Réserver une place</button>
             </form>
         @else
@@ -50,7 +55,7 @@
             @foreach ($collaborateurs['auteur'] as $auteur)
                 {{ $auteur->firstname }}
                 {{ $auteur->lastname }}
-                @if($loop->iteration == $loop->count-1) et
+                @if($loop->iteration === $loop->count-1) et
                 @elseif(!$loop->last), @endif
             @endforeach
         </p>
@@ -68,7 +73,7 @@
             @foreach ($collaborateurs['comédien'] as $comedien)
                 {{ $comedien->firstname }}
                 {{ $comedien->lastname }}
-                @if($loop->iteration == $loop->count-1) et
+                @if($loop->iteration === $loop->count-1) et
                 @elseif(!$loop->last), @endif
             @endforeach
         </p>
