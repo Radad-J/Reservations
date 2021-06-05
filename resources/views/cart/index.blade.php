@@ -57,7 +57,11 @@
                                                 <strong>{{ number_format($show->price, 2) }} €</strong></td>
                                             <td class="border-0 align-middle"><strong>{{ $show->qty }}</strong></td>
                                             <td class="border-0 align-middle">
-                                                <form action="{{ route('cart.remove', $show->rowId) }}" method="post">
+                                                @if ($show->qty > 1)
+                                                    <form action="{{ route('cart.removeOne', $show->rowId) }}" method="post">
+                                                @else
+                                                    <form action="{{ route('cart.remove', $show->rowId) }}" method="post">
+                                                @endif
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
