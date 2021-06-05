@@ -59,13 +59,11 @@
                                             <td class="border-0 align-middle">
                                                 <strong>{{ number_format($show->price, 2) }} €</strong></td>
                                             <td class="border-0 align-middle"><strong>{{ $show->qty }}</strong></td>
-                                            <td class="border-0 align-middle"><strong>{{ $show->options->date . ' at ' . $show->options->time }}</strong></td>
                                             <td class="border-0 align-middle">
-                                                @if ($show->qty > 1)
-                                                    <form action="{{ route('cart.removeOne', $show->rowId) }}" method="post">
-                                                @else
-                                                    <form action="{{ route('cart.remove', $show->rowId) }}" method="post">
-                                                @endif
+                                                <strong>{{ $show->options->date . ' at ' . $show->options->time }}</strong>
+                                            </td>
+                                            <td class="border-0 align-middle">
+                                                <form action="{{ route('cart.remove', $show->rowId) }}" method="post">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
@@ -114,7 +112,7 @@
                 </div>
                 @else
                     <div>
-                        <p>The cart is empty.</p>
+                        <p>Your cart is empty.</p>
                         <p>Find places for your favorite show <a href="{{ route('show.index') }}">here</a>
                         </p>
                     </div>
