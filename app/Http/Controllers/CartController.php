@@ -47,7 +47,7 @@ class CartController extends Controller
 
     /**
      * remove method.
-     * Removes a single item from the cart
+     * Removes an item from the cart
      * @param Request $request
      * @return RedirectResponse
      */
@@ -56,6 +56,20 @@ class CartController extends Controller
         Cart::remove($request->rowId);
 
         return back()->with('success', 'The item has been removed.');
+    }
+
+    /**
+     * removeOne method.
+     * Remove a single instance of an item from the cart
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function removeOne(Request $request): RedirectResponse
+    {
+        $updatedQuantity = Cart::get($request->rowId)->qty - 1;
+        Cart::update($request->rowId, $updatedQuantity);
+
+        return back()->with('success', 'One place has been removed.');
     }
 
     /**
