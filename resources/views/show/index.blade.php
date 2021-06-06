@@ -5,22 +5,22 @@
 @section('content')
     <!-- Success notification -->
     @if(session()->has('message'))
-        <div class="alert alert-success">
+        <div class="alert alert-success mt-2">
             {{ session()->get('message') }}
         </div>
     @endif
 
     <!-- Place added to cart notification -->
     @if(session()->has('success'))
-        <div class="alert alert-success">
+        <div class="alert alert-success mt-2">
             {{ session()->get('success') }}
         </div>
     @endif
 
     <!-- No more place available notification -->
-    @if(session()->has('errror'))
-        <div class="alert alert-error">
-            {{ sessions()->get('error') }}
+    @if(session()->has('error'))
+        <div class="alert alert-danger mt-2">
+            {{ session()->get('error') }}
         </div>
     @endif
 
