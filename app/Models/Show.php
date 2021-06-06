@@ -68,4 +68,36 @@ class Show extends Model
             ->toArray();
     }
 
+    public static function setShowArtist($artistName, $showTitle) {
+        DB::table('artists')
+            ->insert([
+                'firstname' => $artistName,
+                'lastname'  => 'laissemoiinsert'
+            ]);
+
+        $artistId = DB::table('artists')
+            ->select('id')
+            ->where('firstname', '=', $artistName)
+            ->get()
+            ->first();
+
+        DB::table('artist_type')
+            ->insert([
+                'artist_id' => $artistId->id,
+                'type_id' => 4
+            ]);
+
+        $showId = DB::table('shows')
+            ->select('id')
+            ->where('title', '=', $showTitle)
+            ->get()
+            ->first();
+
+        DB::table('artist_type_show')
+            ->insert([
+                'artist_type_id' => 4,
+                'show_id' => 4
+            ]);
+    }
+
 }
