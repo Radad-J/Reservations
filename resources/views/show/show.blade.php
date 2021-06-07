@@ -33,37 +33,40 @@
         @else
             <p>No representation</p>
         @endif
+        @if(isset($collaborateurs['auteur']))
+            <h4>Artists</h4>
+            <p>
+                @foreach ($collaborateurs['auteur'] as $auteur)
+                    {{ $auteur->firstname }}
+                    {{ $auteur->lastname }}
+                    @if($loop->iteration === $loop->count-1) et
+                    @elseif(!$loop->last), @endif
+                @endforeach
+            </p>
+        @endif
+        @if(isset($collaborateurs['scénographe']))
+            <h4>Directors</h4>
+            <p>
+                @foreach ($collaborateurs['scénographe'] as $scenographe)
+                    {{ $scenographe->firstname }}
+                    {{ $scenographe->lastname }}
+                    @if($loop->iteration === $loop->count-1) and
+                    @elseif(!$loop->last), @endif
+                @endforeach
+            </p>
+        @endif
 
-        <h4>Artists</h4>
-        <p>
-            @foreach ($collaborateurs['auteur'] as $auteur)
-                {{ $auteur->firstname }}
-                {{ $auteur->lastname }}
-                @if($loop->iteration === $loop->count-1) et
-                @elseif(!$loop->last), @endif
-            @endforeach
-        </p>
-
-        <h4>Directors</h4>
-        <p>
-            @foreach ($collaborateurs['scénographe'] as $scenographe)
-                {{ $scenographe->firstname }}
-                {{ $scenographe->lastname }}
-                @if($loop->iteration === $loop->count-1) and
-                @elseif(!$loop->last), @endif
-            @endforeach
-        </p>
-
-        <h4>Distribution</h4>
-        <p>
-            @foreach ($collaborateurs['comédien'] as $comedien)
-                {{ $comedien->firstname }}
-                {{ $comedien->lastname }}
-                @if($loop->iteration === $loop->count-1) and
-                @elseif(!$loop->last), @endif
-            @endforeach
-        </p>
-
+        @if(isset($collaborateurs['comédien']))
+            <h4>Distribution</h4>
+            <p>
+                @foreach ($collaborateurs['comédien'] as $comedien)
+                    {{ $comedien->firstname }}
+                    {{ $comedien->lastname }}
+                    @if($loop->iteration === $loop->count-1) and
+                    @elseif(!$loop->last), @endif
+                @endforeach
+            </p>
+        @endif
         <h2 class="mt-2 font-weight-500">Buy your ticket now !</h2>
         @if($show->bookable && $show->representations->count() > 0)
             <form action="{{ route('cart.store') }}" method="post">

@@ -17,6 +17,7 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
+use Maatwebsite\Excel\HeadingRowImport;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ShowController extends Controller
@@ -155,7 +156,39 @@ class ShowController extends Controller
      */
     public function importShows(Request $request): RedirectResponse
     {
+
+        if (is_string(self::verifyCells($request))) {
+            $cell = self::verifyCells($request);
+            return redirect()->route('show.index')->with('error', 'The column ' . $cell . ' is missing in your Excel file.');
+        }
+
         Excel::import(new ShowsImport, $request->userFile);
+
         return redirect()->route('show.index')->with('success', 'Show(s) have been added !');
+    }
+
+    public static function verifyCells(Request $request)
+    {
+        $requiredHeadings = [
+            'title',
+            'slug',
+            'description',
+            'poster_url',
+            'bookable',
+            'location_id',
+            'artists',
+            'price'
+        ];
+
+        $headingsArray = (new HeadingRowImport)->toArray($request->userFile);
+        $headings = $headingsArray[0][0];
+
+        foreach ($requiredHeadings as $requiredCell) {
+            if (!in_array($requiredCell, $headings, true)) {
+                return $requiredCell;
+            }
+        }
+
+        return true;
     }
 }
