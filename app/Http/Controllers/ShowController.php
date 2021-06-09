@@ -14,11 +14,13 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Maatwebsite\Excel\Facades\Excel;
 use Maatwebsite\Excel\HeadingRowImport;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use function PHPUnit\Framework\isNan;
 
 class ShowController extends Controller
 {
@@ -29,12 +31,14 @@ class ShowController extends Controller
      */
     public function index()
     {
+
         $shows = Show::all();
 
         return view('show.index', [
             'shows' => $shows,
             'resource' => 'show',
         ]);
+
     }
 
     /**
@@ -123,28 +127,37 @@ class ShowController extends Controller
     /**
      * exportToExcel method.
      * Exports the list of shows into an Excel file.
-     * @return BinaryFileResponse
      */
-    public function exportToExcel(): BinaryFileResponse
+    public function exportToExcel()
     {
+        if (is_null(Auth::user()) || Auth::user()->role->id != 1) {
+            return redirect()->route("show.index")->with("error", "You are not authorised to access this page.");
+        }
+
         return Excel::download(new ExportShowsToCSV, 'showsList.xlsx');
     }
 
     /**
      * exportToCSV method.
      * Exports the list of shows into a CSV file.
-     * @return BinaryFileResponse
      */
-    public function exportToCSV(): BinaryFileResponse
+    public function exportToCSV()
     {
+        if (is_null(Auth::user()) || Auth::user()->role->id != 1) {
+            return redirect()->route("show.index")->with("error", "You are not authorised to access this page.");
+        }
+
         return Excel::download(new ExportShowsToCSV, 'showsList.csv');
     }
 
     /**
-     * @return Application|Factory|View
      */
     public function importForm()
     {
+        if (is_null(Auth::user()) || Auth::user()->role->id != 1) {
+            return redirect()->route("show.index")->with("error", "You are not authorised to access this page.");
+        }
+
         return view('show.import-form');
     }
 
@@ -152,13 +165,17 @@ class ShowController extends Controller
      * importShows method.
      * Imports a list of shows from an uploaded .csv or .xslx file
      * @param Request $request
-     * @return RedirectResponse
      */
-    public function importShows(Request $request): RedirectResponse
+    public function importShows(Request $request)
     {
+
+        if (is_null(Auth::user()) || Auth::user()->role->id != 1) {
+            return redirect()->route("show.index")->with("error", "You are not authorised to access this page.");
+        }
 
         if (is_string(self::verifyCells($request))) {
             $cell = self::verifyCells($request);
+
             return redirect()->route('show.index')->with('error', 'The column ' . $cell . ' is missing in your Excel file.');
         }
 
