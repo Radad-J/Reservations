@@ -31,3 +31,20 @@
     color: #aaa;
     font-style: italic;
 }
+
+.title-welcome {
+    color: white;
+    margin-top: 40vh;
+    transform: translateY(-50%);
+}
+
+.row-cover {
+    background-image: url('/images/theatre-couverture.jpeg');
+    height: 80vh;
+    background-position: center center;
+    background-size: cover;
+}
+.table-row{
+    -webkit-box-shadow: 0px -50px 20px 0px rgba(0,0,0,0.74);
+    box-shadow: 0px -50px 20px 0px rgba(0,0,0,0.74);
+}
