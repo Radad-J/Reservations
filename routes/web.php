@@ -9,8 +9,10 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\ShowController;
 use App\Http\Controllers\TypeController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use TCG\Voyager\Voyager;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,56 +25,56 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+/* Welcome Route */
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
+/* Auth Routes */
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-//Artist routes
+// Artist routes
 Route::get('artist', [ArtistController::class, 'index'])->name('artist.index');
 Route::get('artist/{id}', [ArtistController::class, 'show'])->where('id', '[0-9]+')->name('artist.show');
 
-//Type routes
+// Type routes
 Route::get('type', [TypeController::class, 'index'])->name('type.index');
 Route::get('type/{id}', [TypeController::class, 'show'])->where('id', '[0-9]+')->name('type.show');
 
-//Locality routes
+// Locality routes
 Route::get('locality', [LocalityController::class, 'index'])->name('locality.index');
 Route::get('locality/{id}', [LocalityController::class, 'show'])->where('id', '[0-9]+')->name('locality.show');
 
-//Role routes
+// Role routes
 Route::get('role', [RoleController::class, 'index'])->name('role.index');
 Route::get('role/{id}', [RoleController::class, 'show'])->where('id', '[0-9]+')->name('role.show');
 
-//Shows routes
+// Shows routes
 Route::get('show', [ShowController::class, 'index'])->name('show.index');
 Route::get('show/{id}', [ShowController::class, 'show'])->where('id', '[0-9]+')->name('show.show');
 Route::get('show/create', [ShowController::class, 'create'])->name('show.create');
 Route::put('show/store', [ShowController::class, 'store'])->name('show.store');
 Route::get('show/search', [ShowController::class, 'search'])->name('show.search');
 
-//CSV routes
+// CSV routes
 Route::get('/show/export-to-excel', [ShowController::class, 'exportToExcel'])->name('show.excel');
 Route::get('/show/export-to-csv', [ShowController::class, 'exportToCSV'])->name('show.csv');
 Route::get('/show/import', [ShowController::class, 'importForm'])->name('show.import');
 Route::post('/show/import-handler', [ShowController::class, 'importShows'])->name('show.importHandler');
 
-//Representations routes
+// Representations routes
 Route::get('representation', [RepresentationController::class, 'index'])->name('representation.index');
 Route::get('representation/{id}', [RepresentationController::class, 'show'])->where('id', '[0-9]+')->name('representation.show');
 
-//User routes
+// User routes
 Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')->name('user.show');
 
-//Voyager routes
+// Voyager routes
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
-//Route des flux Russ
+// Route des flux Russ
 Route::feeds();
 
 /* Cart Routes */
