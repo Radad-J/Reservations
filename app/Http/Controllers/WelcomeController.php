@@ -12,7 +12,7 @@ class WelcomeController extends Controller
      */
     public function index()
     {
-        $shows = Show::all();
+        $shows = Show::orderBy('title')->paginate(3);
 
         return view('welcome', [
             'shows' => $shows
