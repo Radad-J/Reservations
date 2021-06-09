@@ -2,7 +2,7 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home
+                <a class="nav-link" href="/">Home
                     <span class="sr-only">(current)</span>
                 </a>
             </li>
@@ -17,7 +17,7 @@
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="{{route('locality.index')}}">Localities</a>
                     <a class="dropdown-item" href="{{route('artist.index')}}">Artists</a>
-                    @if (Auth::check() && Auth::user()->role->id === 1)
+                    @if (Auth::check() && Auth::user()->role_id === 1)
                         <a class="dropdown-item" href="{{ route('show.excel') }}">Download shows list as an Excel
                             file</a>
                         <a class="dropdown-item" href="{{ route('show.csv') }}">Download shows list as a CSV file</a>
@@ -25,10 +25,12 @@
                     @endif
                 </div>
             </li>
-            @if (Auth::check() && Auth::user()->role->id === 1)
-                <li class="nav-item">
-                    <a class="nav-link" href="{{route('administration')}}">Administration</a>
-                </li>
+            @if (Auth::check() && !is_null(Auth::user()))
+                @if (Auth::user()->role_id === 1)
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('admin.show', Auth::user()->role_id) }}">Administration</a>
+                    </li>
+                @endif
             @endif
         </ul>
         <ul class="navbar-nav ml-auto">
