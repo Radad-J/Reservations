@@ -34,11 +34,10 @@
 @else
     <div class="container">
 @endif
+    @yield('content')
+    </div>
 
-@yield('content')
-</div>
-
-@include('../layouts/footer')
-@yield('payment-js')
+    @include('../layouts/footer')
+    @yield('payment-js')
 </body>
 </html>
