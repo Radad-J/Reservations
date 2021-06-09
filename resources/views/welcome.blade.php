@@ -7,7 +7,6 @@
             <th scope="col">Title</th>
             <th scope="col">Place</th>
             <th scope="col">Price</th>
-            <th scope="col">Artists</th>
             <th scope="col">Representations</th>
             <th scope="col">Bookable</th>
             <th scope="col">Details</th>
@@ -19,17 +18,7 @@
                 <td>{{ $show->title }}</td>
                 <td>{{ $show->location->designation }}</td>
                 <td>{{ $show->price }} €</td>
-                <td>
-                    @foreach($show->artistTypes as $artistType)
-                        {{ $artistType->artist->firstname }}
-                        {{ $artistType->artist->lastname }}
-                        @if($loop->iteration === $loop->count-1)
-                            and
-                        @elseif(!$loop->last)
-                            ,
-                        @endif
-                    @endforeach
-                </td>
+
                 <td>
                     @if(count($show->representations))
                         {{ count($show->representations) }} representation(s) available
