@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use TCG\Voyager\Http\Controllers\VoyagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -72,6 +73,10 @@ Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')-
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
+
+if (Auth::check() && Auth::user()->role->id == 1) {
+    Route::get('/dashboard', [VoyagerController::class, 'index'])->middleware('auth')->name('administration')->prefix('admin');
+}
 
 // Route des flux Russ
 Route::feeds();
