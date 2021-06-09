@@ -1,10 +1,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <h1>Welcome page</h1>
-
-    <h4>List of our shows</h4>
-
     <table class="table table-hover">
         <thead>
         <tr>
@@ -42,4 +38,7 @@
         @endforeach
         </tbody>
     </table>
+    <div class="row">
+        <div class="m-auto">{{ $shows->links() }}</div>
+    </div>
 @endsection
