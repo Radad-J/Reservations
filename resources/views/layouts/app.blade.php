@@ -17,9 +17,9 @@
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
     <!-- Placeholder for Stripe's security script checkout@index.black.php-->
-    @yield('payment-script')
+@yield('payment-script')
 
-    <!-- Styles -->
+<!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
@@ -28,9 +28,16 @@
 </head>
 <body>
 @include('../layouts/header')
+
+@if(Route::currentRouteName() === "welcome")
+    <div class="col-12">
+@else
     <div class="container">
-        @yield('content')
-    </div>
+@endif
+
+@yield('content')
+</div>
+
 @include('../layouts/footer')
 @yield('payment-js')
 </body>
