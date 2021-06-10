@@ -12,7 +12,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use TCG\Voyager\Http\Controllers\VoyagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,6 +51,7 @@ Route::get('role/{id}', [RoleController::class, 'show'])->where('id', '[0-9]+')-
 // Shows routes
 Route::get('show', [ShowController::class, 'index'])->name('show.index');
 Route::post('show/order', [ShowController::class, 'order'])->name('show.order');
+Route::post('show/filter', [ShowController::class, 'filter'])->name('show.filter');
 Route::get('show/{id}', [ShowController::class, 'show'])->where('id', '[0-9]+')->name('show.show');
 Route::get('show/create', [ShowController::class, 'create'])->name('show.create');
 Route::put('show/store', [ShowController::class, 'store'])->name('show.store');
@@ -76,7 +76,7 @@ Route::get('/profile', [UserController::class, 'profile'])->name('user.profile')
 
 
 // Voyager routes
-Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 
     Route::get('/dashboard', [VoyagerController::class, 'index'])->name('admin.show');
