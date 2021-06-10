@@ -1,22 +1,17 @@
 <nav class="navbar navbar-expand-lg navbar-dark">
     <div class="collapse navbar-collapse" id="navbarColor01">
-        <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home
-                    <span class="sr-only">(current)</span>
-                </a>
-            </li>
-
+        <a class="nav-link" href="/">
+            <img width="100" src="/images/logo-reservations-petit.png"/>
+        </a>
+        <ul class="navbar-nav mr-auto ">
             <li class="nav-item">
                 <a class="nav-link" href="{{route('show.index')}}">Shows</a>
             </li>
-            
             @if (Auth::check())
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('representation.bookings', Auth::id())}}">My Bookings</a>
                 </li>
             @endif
-
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                    aria-expanded="false">Other</a>
@@ -57,12 +52,14 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ route('register') }}">Sign up</a>
                 </li>
-        @endif
-        <!-- Cart link w/ item count-->
-            <li class="ml-2 nav-item ">
-                <a href="{{ route('cart.index') }}" class="text-white nav-link">Cart <span
-                        class="badge badge-pill badge-dark">{{ Cart::count() }}</span></a>
-            </li>
+            @endif
+            @if (Auth::check() && Auth::user()->role_id === 1)
+            <!-- Cart link w/ item count-->
+                <li class="ml-2 nav-item ">
+                    <a href="{{ route('cart.index') }}" class="text-white nav-link">Cart <span
+                            class="badge badge-pill badge-dark">{{ Cart::count() }}</span></a>
+                </li>
+            @endif
         </ul>
     </div>
 </nav>

@@ -34,8 +34,11 @@
 
 .title-welcome {
     color: white;
-    margin-top: 40vh;
-    transform: translateY(-50%);
+    transform: translateY(-10%);
+}
+
+.img-logo-home{
+    transform: translateY(-20%);
 }
 
 .row-cover {
