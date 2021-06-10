@@ -77,6 +77,10 @@ Route::group(['prefix' => 'admin'], function () {
     Route::get('/dashboard', [VoyagerController::class, 'index'])->name('admin.show');
 });
 
+if (Auth::check() && Auth::user()->role->id == 1) {
+    Route::get('/dashboard', [VoyagerController::class, 'index'])->middleware('auth')->name('administration')->prefix('admin');
+}
+
 // Route des flux Russ
 Route::feeds();
 

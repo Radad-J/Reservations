@@ -42,46 +42,6 @@ class ShowController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param Request $request
-     * @return string
-     */
-    public function store(Request $request): string
-    {
-        $request->validate([
-            'title' => 'required',
-            'price' => 'required|numeric',
-            'description' => 'required',
-            'location' => 'required',
-            'showImage' => 'required|image|mimes:jpeg,png,jpg|max:4092'
-        ]);
-
-        $show = new Show;
-        $show->slug = Str::of($request->title)->slug();
-        $show->title = $request->title;
-        $show->description = $request->description;
-        $show->location_id = $request->location;
-        $show->price = $request->price;
-        $show->bookable = !empty($request->bookable) && $request->bookable === 'on';
-
-        if ($request->file('showImage')->isValid()) {
-            // Rewrite image's name to avoid duplicates
-            $imageName = Carbon::now()->timestamp . '.' . $request->showImage->extension();
-            $show->poster_url = $imageName;
-            $request->showImage->move(public_path('images/uploaded-posters'), $imageName);
-        } else {
-            return view('show.create', [
-                'resource' => 'show'  // TODO: Add error handling
-            ]);
-        }
-
-        return $show->save()
-            ? redirect()->route('show.index')->with('message', 'Show has been added !')
-            : view('show.create', ['resource' => 'show']);
-    }
-
-    /**
      * Display the specified resource.
      *
      * @param int $id
