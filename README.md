@@ -14,6 +14,8 @@ Les membres du groupe du projet Reservations sont :
 
 Vous pourrez retrouver l'avancement des tâches de chacun des membres sur le [board Trello](https://trello.com/b/y85nxpRZ/wpwd-groupe-1) dédié au groupe.
 
+Si vous souhaitez voir la participation de chacun des membres, [cliquez ici](https://github.com/Radad-J/Reservations/graphs/contributors)
+
 Chacun des membres a pu se familiariser avec le travail en équipe, le versioning d'un projet sur github, les méthodes GIT et surtout Laravel.
 
 ## Comment l'installer
