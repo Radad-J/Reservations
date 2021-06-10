@@ -15,8 +15,10 @@
                                             src="@if( !filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL)){{ Voyager::image( Auth::user()->avatar ) }}@else{{ Auth::user()->avatar }}@endif"
                                             style="width:100px" class="img-radius" alt="User-Profile-Image"></div>
                                     <h6 class="f-w-600">{{ucFirst($user->name)}}</h6>
-                                    <p>{{$user->role->display_name}}</p> <i
-                                        class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                    
+                                    <p>{{$user->role->display_name}}</p>
+                                    <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
+                                    <a href="{{route('user.modify', Auth::id())}}" class="btn">Modify my profile</a>
                                 </div>
                             </div>
                             <div class="col-sm-8">
@@ -30,8 +32,8 @@
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Language</p>
                                             <h6 class="text-muted f-w-400">
-                                                @if(is_null($user->settings))
-                                                    <h3>bla bla</h3>
+                                                @if(!$user->settings->has('locale'))
+                                                    Unspecified
                                                 @else
                                                     {{ ucFirst(json_decode($user->settings)->{'locale'}) }}
                                                 @endif
@@ -46,28 +48,29 @@
                                                 @if(!is_null($user->created_at))
                                                     {{$user->created_at->toDayDateTimeString()}}
                                                 @else
-                                                    Unavailable
+                                                    Unspecified
                                                 @endif
                                             </h6>
                                         </div>
                                         <div class="col-sm-6">
                                             <p class="m-b-10 f-w-600">Updated at</p>
-                                            @if(!is_null($user->updated_at))
-                                                <h6 class="text-muted f-w-400">{{$user->updated_at->toDayDateTimeString()}}
-                                                    @else
-                                                        Unavailable
-                                                    @endif
-                                                </h6>
+                                            <h6 class="text-muted f-w-400">
+                                                @if(!is_null($user->updated_at))
+                                                    {{$user->updated_at->toDayDateTimeString()}}
+                                                @else
+                                                    Unspecified
+                                                @endif
+                                            </h6>
                                         </div>
                                     </div>
                                     <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Reservations</h6>
                                     @if($user->representation->count() > 0)
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <p class="m-b-10 f-w-600">My reservations</p>
-                                            <h6 class="text-muted f-w-400">{{$user->representation->count()}}</h6>
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <p class="m-b-10 f-w-600">My reservations</p>
+                                                <h6 class="text-muted f-w-400">{{$user->representation->count()}}</h6>
+                                            </div>
                                         </div>
-                                    </div>
                                     @else
                                         <div class="row">
                                             <div class="col-sm-6">
