@@ -50,7 +50,7 @@
             <form  action="{{ route('show.order') }}" method="POST">
             @csrf
                 <div class="input-group-append">
-                    <button class="button" name="field" value="title">Tilte</button>
+                    <button class="button" name="field" value="title">Title</button>
                     <button class="button" name="field" value="price">Price</button>
                 </div>
                 <div>
