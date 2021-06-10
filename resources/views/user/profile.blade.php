@@ -70,9 +70,29 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );" href="{{route('user.modify', Aut
                                     <h6 class="m-b-20 m-t-40 p-b-5 b-b-default f-w-600">Reservations</h6>
                                     @if($user->representation->count() > 0)
                                         <div class="row">
-                                            <div class="col-sm-6">
+                                            <div>
                                                 <p class="m-b-10 f-w-600">My reservations</p>
-                                                <h6 class="text-muted f-w-400">{{$user->representation->count()}}</h6>
+                                                <table>
+                                                    <thead>
+                                                    <tr>
+                                                        <th>Nom du spectacle</th>
+                                                        <th>Lieu</th>
+                                                        <th>Date et heure</th>
+                                                        <th>Nombre de place</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    @foreach($bookings as $booking)
+                                                        <tr>
+                                                            <td>{{ $booking->representation->show->title }}</td>
+                                                            <td>{{ $booking->representation->location->address }} à {{ $booking->representation->location->locality->postal_code }} 
+                                                            {{ $booking->representation->location->locality->locality }}</td>
+                                                            <td>{{ $booking->representation->when }}</td>
+                                                            <td>{{ $booking->places }}</td>
+                                                        </tr>
+                                                    @endforeach
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>
                                     @else
