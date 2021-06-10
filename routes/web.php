@@ -65,6 +65,7 @@ Route::post('/show/import-handler', [ShowController::class, 'importShows'])->nam
 // Representations routes
 Route::get('representation', [RepresentationController::class, 'index'])->name('representation.index');
 Route::get('representation/{id}', [RepresentationController::class, 'show'])->where('id', '[0-9]+')->name('representation.show');
+Route::get('representation/bookings/{id}', [RepresentationController::class, 'bookings'])->where('id', '[0-9]+')->middleware('auth')->name('representation.bookings');
 
 // User routes
 Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')->name('user.show');
