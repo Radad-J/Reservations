@@ -65,11 +65,14 @@ Route::post('/show/import-handler', [ShowController::class, 'importShows'])->nam
 // Representations routes
 Route::get('representation', [RepresentationController::class, 'index'])->name('representation.index');
 Route::get('representation/{id}', [RepresentationController::class, 'show'])->where('id', '[0-9]+')->name('representation.show');
+Route::get('representation/bookings/{id}', [RepresentationController::class, 'bookings'])->where('id', '[0-9]+')->middleware('auth')->name('representation.bookings');
 
 // User routes
 Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')->name('user.show');
 Route::get('user/modify/{id}', [UserController::class, 'edit'])->where('id', '[0-9]+')->name('user.modify');
 Route::post('user/update/{id}', [UserController::class, 'update'])->where('id', '[0-9]+')->name('user.update');
+Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
+
 
 // Voyager routes
 Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {

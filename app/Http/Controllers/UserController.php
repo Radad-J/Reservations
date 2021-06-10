@@ -108,4 +108,14 @@ class UserController extends Controller
 
         return redirect()->route('welcome')->with('error', 'Access Forbidden.');
     }
+
+    public function profile(){
+
+        $user_id = Auth::id();
+        $user = User::find($user_id);
+
+        return view('user.profile',[
+            'user' => $user,
+        ]);
+    }
 }

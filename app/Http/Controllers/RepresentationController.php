@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Representation;
+use App\Models\RepresentationUser;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -20,6 +21,21 @@ class RepresentationController extends Controller
         return view('representation.index', [
             'representations' => $representations,
             'resource' => 'représentations',
+        ]);
+    }
+
+    /**
+     * Display all the bookings of a specified user.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @return \Illuminate\Http\Response
+     */
+    public function bookings(Request $request, int $userId)
+    {
+        $bookings = RepresentationUser::where('user_id', '=', $userId)->get();
+
+        return view('representation.bookings', [
+            'bookings' => $bookings,
         ]);
     }
 

@@ -10,6 +10,12 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('show.index')}}">Shows</a>
             </li>
+            
+            @if (Auth::check())
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ route('representation.bookings', Auth::id())}}">My Bookings</a>
+                </li>
+            @endif
 
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
@@ -36,7 +42,7 @@
         <ul class="navbar-nav ml-auto">
             @if(Auth::user())
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.show', Auth::id())}}">Profile</a>
+                    <a class="nav-link" href="{{ route('user.profile')}}">Profile</a>
                 </li>
                 <li class="nav-item">
                     <form method="POST" action="/logout">
