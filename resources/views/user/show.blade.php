@@ -16,14 +16,13 @@
         @endif
         <div class="card-body">
             <h4 class="card-title">{{ ucfirst($user->firstname) }} {{ ucfirst($user->lastname) }}</h4>
-            <a href="{{ route('user.modify', Auth::user()->id) }}">Modify my profile</a>
+            <a href="{{ route('user.modify', Auth::id()) }}">Modify my profile</a>
             <table class="table table-hover">
                 <thead>
                 <tr>
                     <th scope="col">E-mail</th>
                     <th scope="col">Name</th>
-                    <th scope="col">Last modified:</th>
-
+                    <th scope="col">Last modified</th>
                 </tr>
                 </thead>
                 <tbody>
