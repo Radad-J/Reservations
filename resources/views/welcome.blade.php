@@ -2,7 +2,8 @@
 
 @section('content')
     <div class="row row-cover">
-        <div class="col-12">
+        <div class="col m-auto text-center">
+            <img class="m-auto text-center img-logo-home" src="/images/logo-reservations.png"/>
             <h1 class="text-center title-welcome">Explore our extensive show collections and find something you
                 love.</h1>
         </div>
