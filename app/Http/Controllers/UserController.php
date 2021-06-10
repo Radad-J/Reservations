@@ -77,29 +77,33 @@ class UserController extends Controller
                         : $request->email;
 
                     // Check if User is not using the same data than what's set in DDB
-                    if (!User::checkIfFieldsAreDifferent($user, $email, $name)) {
+                    if (!User::checkIfFieldsAreDifferent($user, $request)) {
                         return back()->with('error', 'The values given are the same than what is set for your profile.');
                     }
 
                     // Check if email is already present in DDB
-                    if (!User::verifyEmailIsNotPresentInDb($request->email)) {
-                        return back()->with('error', 'The email is already taken');
+                    if (!is_null($request->email) && !User::verifyEmailIsNotPresentInDb($request->email)) {
+                        return back()->with('error', 'The email is already taken.');
                     }
 
                     // User wants to change their password
-                    if (!is_null($request->password) && !is_null($request->confPassword)) {
-                        if ($request->password === $request->confPassword) {
-                            // Regex check validation
-                            if (User::checkPasswordValidity($request->password)) {
-                                $newPassword = $request->password;
+                    if (User::checkIfAPasswordIsGiven($request)) {
+                        if (!is_null($request->password) && !is_null($request->confPassword)) {
+                            if ($request->password === $request->confPassword) {
+                                // Regex check validation
+                                if (User::checkPasswordValidity($request->password)) {
+                                    $newPassword = $request->password;
 
-                                // Hashing and storing the new password
-                                $user->password = Hash::make($newPassword);
+                                    // Hashing and storing the new password
+                                    $user->password = Hash::make($newPassword);
+                                } else {
+                                    return back()->with('error', 'The new password must be at least 8 characters long, 1 uppercase, 1 lowercase & 1 number.')->withInput();
+                                }
                             } else {
-                                return back()->with('error', 'The new password must be at least 8 characters long, 1 uppercase, 1 lowercase & 1 number.')->withInput();
+                                return back()->with('error', 'The passwords don\'t match.');
                             }
                         } else {
-                            return back()->with('error', 'The passwords don\'t match.')->withInput();
+                            return back()->with('error', 'Please make sure to confirm your password.');
                         }
                     }
 
