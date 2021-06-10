@@ -69,18 +69,18 @@ Route::get('representation/bookings/{id}', [RepresentationController::class, 'bo
 
 // User routes
 Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')->name('user.show');
+Route::get('user/modify/{id}', [UserController::class, 'edit'])->where('id', '[0-9]+')->name('user.modify');
+Route::post('user/update/{id}', [UserController::class, 'update'])->where('id', '[0-9]+')->name('user.update');
 Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 
+
 // Voyager routes
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Voyager::routes();
 
     Route::get('/dashboard', [VoyagerController::class, 'index'])->name('admin.show');
 });
 
-if (Auth::check() && Auth::user()->role->id == 1) {
-    Route::get('/dashboard', [VoyagerController::class, 'index'])->middleware('auth')->name('administration')->prefix('admin');
-}
 
 // Route des flux Russ
 Route::feeds();

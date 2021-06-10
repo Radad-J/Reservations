@@ -3,52 +3,27 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\View\View;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
     /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
      * Display the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Application|Factory|View
      */
     public function show($id)
     {
         $user = User::find($id);
 
-        return view('user.show',[
+        return view('user.show', [
             'user' => $user,
         ]);
 
@@ -57,35 +32,81 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param int $id
+     * @return Application|Factory|View|RedirectResponse
      */
     public function edit($id)
     {
-        //
+
+        if (is_null(Auth::user())
+            || Auth::user()->id != (int)$id
+            || !Auth::check()) {
+            return redirect()->route('show.index')->with('error', 'Please log in to access this page.');
+        }
+
+        $user = User::find($id);
+
+        return view('user.modify', [
+            'user' => $user
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param int|string $id
+     * @return RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, $id): RedirectResponse
     {
-        //
-    }
+        if ($request->isMethod('post')) {
+            if (isset($request->submit) && Auth::id() === (int)$id) {
+                if (User::checkModifiedFields($request)) {
+                    $user = User::where('id', $id)->first();
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+                    // Store fields, if user hasn't specified a field, use the DDB's data
+                    $name = is_null($request->name)
+                        ? $user->name
+                        : $request->name;
+
+                    $email = is_null($request->email)
+                        ? $user->email
+                        : $request->email;
+
+                    // User wants to change their password
+                    if (!is_null($request->password) && !is_null($request->confPassword)) {
+                        if ($request->password === $request->confPassword) {
+                            if (User::checkPasswordValidity($request->password)) {
+                                $newPassword = $request->password;
+
+                                // Hashing and storing the new password
+                                $user->password = Hash::make($newPassword);
+                            } else {
+                                return back()->with('error', 'The new password must be at least 8 characters long, 1 uppercase, 1 lowercase & 1 number.')->withInput();
+                            }
+                        } else {
+                            return back()->with('error', 'The passwords don\'t match.')->withInput();
+                        }
+                    }
+
+                    // Storing the data (even if unchanged)
+                    $user->name = $name;
+                    $user->email = $email;
+
+                    // Saving data
+                    return $user->save()
+                        ? redirect()->route('user.show', $user->id)->with('success', 'Your personal details have been successfully updated !')
+                        : redirect()->route('user.show', $user->id)->with('error', 'There was a problem updating your personal details.');
+                }
+
+                return redirect()->route('user.modify', Auth::id())->with('back', 'Please fill in at least one field you wish to update or go back');
+            }
+        } else {
+            return redirect()->route('show.index')->with('error', 'Access Forbidden.');
+        }
+
+        return redirect()->route('welcome')->with('error', 'Access Forbidden.');
     }
 
     public function profile(){
