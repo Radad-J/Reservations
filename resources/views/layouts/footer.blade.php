@@ -4,7 +4,7 @@
         © 2020 Copyright:
         <a class="text-dark" href="{{ url('https://github.com/mvker') }}" target="_blank">Nathan,</a>
         <a class="text-dark" href="{{ url('https://github.com/M-Boudart') }}" target="_blank">Maxime,</a>
-        <a class="text-dark" href="{{ url('https://github.com/AminoPapy95') }}" target="_blank">Amine</a>
+        <a class="text-dark" href="{{ url('https://github.com/adamprefo') }}" target="_blank">Adam</a>
         &
         <a class="text-dark" href="{{ url('https://github.com/Radad-J') }}" target="_blank">Radad.</a>
     </div>
