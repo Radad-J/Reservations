@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\RepresentationUser;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -113,9 +114,11 @@ class UserController extends Controller
 
         $user_id = Auth::id();
         $user = User::find($user_id);
+        $bookings = RepresentationUser::where('user_id', '=', $user_id)->get();
 
         return view('user.profile',[
             'user' => $user,
+            'bookings' => $bookings,
         ]);
     }
 }

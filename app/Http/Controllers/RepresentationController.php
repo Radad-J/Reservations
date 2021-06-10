@@ -25,21 +25,6 @@ class RepresentationController extends Controller
     }
 
     /**
-     * Display all the bookings of a specified user.
-     *
-     * @param \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
-     */
-    public function bookings(Request $request, int $userId)
-    {
-        $bookings = RepresentationUser::where('user_id', '=', $userId)->get();
-
-        return view('representation.bookings', [
-            'bookings' => $bookings,
-        ]);
-    }
-
-    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
