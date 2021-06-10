@@ -12,6 +12,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\WelcomeController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use TCG\Voyager\Http\Controllers\VoyagerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,8 +30,6 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 /* Auth Routes */
 Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // Artist routes
 Route::get('artist', [ArtistController::class, 'index'])->name('artist.index');
@@ -76,7 +75,7 @@ Route::get('/profile', [UserController::class, 'profile'])->name('user.profile')
 
 
 // Voyager routes
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function () {
     Voyager::routes();
 
     Route::get('/dashboard', [VoyagerController::class, 'index'])->name('admin.show');
