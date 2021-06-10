@@ -208,4 +208,12 @@ class ShowController extends Controller
 
         return true;
     }
+    public function order(Request $request){
+        $request->validate([
+            'field'=>'required',
+            'orderType'=> 'required'
+        ]);
+        $shows= Show::orderby ($request->field,$request->orderType)->get();
+        return view('show.index',['shows' => $shows]);
+    } 
 }

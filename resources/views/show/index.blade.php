@@ -24,6 +24,10 @@
         </div>
     @endif
 
+    @error("orderType")
+    <div class="alert alert-danger">
+    Vous devez selectionner une méthode de tri</div>
+    @enderror
     <div class="row pt-5">
         <div class="col-lg-8 mx-auto">
             <form action="{{ route('show.search') }}" method="GET" role="search">
@@ -37,6 +41,23 @@
                                     class="fa fa-search"></i></button>
                         </div>
                     </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="row pt-5">
+        <div class="col-lg-8 mx-auto">
+            <form  action="{{ route('show.order') }}" method="POST">
+            @csrf
+                <div class="input-group-append">
+                    <button class="btn btn-primary mr-5" name="field" value="title">Titre</button>
+                    <button class="btn btn-primary mr-5" name="field" value="price">Prix</button>
+                </div>
+                <div class="input-group-append">
+                    <label for="asc">Croissant</label>
+                    <input type="radio" name="orderType" id="asc" value="asc">
+                    <label for="desc">Décroissant</label>
+                    <input type="radio" name="orderType" id="desc" value="desc">
                 </div>
             </form>
         </div>
