@@ -50,14 +50,27 @@
             <form  action="{{ route('show.order') }}" method="POST">
             @csrf
                 <div class="input-group-append">
-                    <button class="btn btn-primary mr-5" name="field" value="title">Titre</button>
-                    <button class="btn btn-primary mr-5" name="field" value="price">Prix</button>
+                    <button class="button" name="field" value="title">Tilte</button>
+                    <button class="button" name="field" value="price">Price</button>
                 </div>
+                <div>
+                    <label for="asc"><i class="fas fa-sort-alpha-up"></i></label>
+                    <input class="custombtn1" type="radio" name="orderType" id="asc" value="asc">
+                    <label for="desc"><i class="fas fa-sort-alpha-down-alt"></i></label>
+                    <input type="radio"  class="custombtn2" name="orderType" id="desc" value="desc">
+                </div>
+                
+            </form>
+        </div>
+    </div>
+    <!--Filtrer-->
+    <div class="row pt-5">
+        <div class="col-lg-8 mx-auto">
+            <form  action="{{ route('show.filter') }}" method="POST">
+            @csrf
                 <div class="input-group-append">
-                    <label for="asc">Croissant</label>
-                    <input type="radio" name="orderType" id="asc" value="asc">
-                    <label for="desc">Décroissant</label>
-                    <input type="radio" name="orderType" id="desc" value="desc">
+                    <button class="button" name="filterType" value="bookable"> Bookable now! <i class="fas fa-filter"></i>
+                    <button class="button" name="filterType" value="all"> All <i class="fas fa-eye"></i></button>
                 </div>
             </form>
         </div>
