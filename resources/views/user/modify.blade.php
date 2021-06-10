@@ -2,7 +2,6 @@
 
 @section('content')
     <h1>Modify your profile</h1>
-    <h6>Please fill in the fields you wish to edit.</h6>
     <!-- Error message -->
     @if (session()->has('error'))
         <div class="alert alert-danger">
@@ -10,7 +9,13 @@
         </div>
     @endif
 
-    <form action="{{ route('user.update', Auth::user()->id) }}" method="post" autocomplete="off">
+    @if (session()->has('back'))
+        <div class="alert alert-danger">
+            {{ session()->get('back') }} to <a href="{{ route('user.show', Auth::id()) }}">your profile page.</a>
+        </div>
+    @endif
+
+    <form action="{{ route('user.update', Auth::id()) }}" method="post" autocomplete="off">
     @csrf
     <!-- Name -->
         <label id="name_label" for="name">Name</label>
