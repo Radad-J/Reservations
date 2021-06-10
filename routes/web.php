@@ -69,10 +69,13 @@ Route::get('representation/bookings/{id}', [RepresentationController::class, 'bo
 
 // User routes
 Route::get('user/{id}', [UserController::class, 'show'])->where('id', '[0-9]+')->name('user.show');
+Route::get('/profile', [UserController::class, 'profile'])->name('user.profile');
 
 // Voyager routes
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
+
+    Route::get('/dashboard', [VoyagerController::class, 'index'])->name('admin.show');
 });
 
 if (Auth::check() && Auth::user()->role->id == 1) {

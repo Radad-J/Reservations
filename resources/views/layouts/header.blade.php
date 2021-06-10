@@ -40,7 +40,7 @@
         <ul class="navbar-nav ml-auto">
             @if(Auth::user())
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('user.show', Auth::id())}}">Profile</a>
+                    <a class="nav-link" href="{{ route('user.profile')}}">Profile</a>
                 </li>
                 <li class="nav-item">
                     <form method="POST" action="/logout">
