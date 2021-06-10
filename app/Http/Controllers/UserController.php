@@ -40,7 +40,7 @@ class UserController extends Controller
     {
 
         if (is_null(Auth::user())
-            || Auth::user()->id != (int)$id
+            || Auth::id() != (int)$id
             || !Auth::check()) {
             return redirect()->route('show.index')->with('error', 'Please log in to access this page.');
         }
@@ -53,7 +53,8 @@ class UserController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * update method.
+     * Handles the update of an user's information.
      *
      * @param Request $request
      * @param int|string $id
@@ -66,7 +67,7 @@ class UserController extends Controller
                 if (User::checkModifiedFields($request)) {
                     $user = User::where('id', $id)->first();
 
-                    // Store fields, if user hasn't specified a field, use the DDB's data
+                    // Store fields, if the user hasn't specified/filled a field, use the DDB's data
                     $name = is_null($request->name)
                         ? $user->name
                         : $request->name;
@@ -75,9 +76,20 @@ class UserController extends Controller
                         ? $user->email
                         : $request->email;
 
+                    // Check if User is not using the same data than what's set in DDB
+                    if (!User::checkIfFieldsAreDifferent($user, $email, $name)) {
+                        return back()->with('error', 'The values given are the same than what is set for your profile.');
+                    }
+
+                    // Check if email is already present in DDB
+                    if (!User::verifyEmailIsNotPresentInDb($request->email)) {
+                        return back()->with('error', 'The email is already taken');
+                    }
+
                     // User wants to change their password
                     if (!is_null($request->password) && !is_null($request->confPassword)) {
                         if ($request->password === $request->confPassword) {
+                            // Regex check validation
                             if (User::checkPasswordValidity($request->password)) {
                                 $newPassword = $request->password;
 
@@ -110,13 +122,13 @@ class UserController extends Controller
         return redirect()->route('welcome')->with('error', 'Access Forbidden.');
     }
 
-    public function profile(){
-
+    public function profile()
+    {
         $user_id = Auth::id();
         $user = User::find($user_id);
         $bookings = RepresentationUser::where('user_id', '=', $user_id)->get();
 
-        return view('user.profile',[
+        return view('user.profile', [
             'user' => $user,
             'bookings' => $bookings,
         ]);
