@@ -27,9 +27,9 @@ class Representation extends Model
         return $this->belongsTo(Show::class);
     }
 
-    public function locations()
+    public function location()
     {
-        return $this->belongsTo(Location::class);
+        return $this->belongsTo(Location::class, 'location_id');
     }
 
     public function users () {
