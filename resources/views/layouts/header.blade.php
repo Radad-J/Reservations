@@ -7,11 +7,6 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{route('show.index')}}">Shows</a>
             </li>
-            @if (Auth::check())
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ route('representation.bookings', Auth::id())}}">My Bookings</a>
-                </li>
-            @endif
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
                    aria-expanded="false">Other</a>
