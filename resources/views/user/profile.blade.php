@@ -15,6 +15,7 @@
                                             src="@if( !filter_var(Auth::user()->avatar, FILTER_VALIDATE_URL)){{ Voyager::image( Auth::user()->avatar ) }}@else{{ Auth::user()->avatar }}@endif"
                                             style="width:100px" class="img-radius" alt="User-Profile-Image"></div>
                                     <h6 class="f-w-600">{{ucFirst($user->name)}}</h6>
+                                    
                                     <p>{{$user->role->display_name}}</p>
                                     <i class=" mdi mdi-square-edit-outline feather icon-edit m-t-10 f-16"></i>
                                     <a href="{{route('user.modify', Auth::id())}}" class="btn">Modify my profile</a>
