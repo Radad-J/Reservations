@@ -43,10 +43,6 @@ class User extends \TCG\Voyager\Models\User
         'email_verified_at' => 'datetime',
     ];
 
-    /*public function roles () {
-        return $this->belongsToMany(Role::class);
-    }*/
-
     public function representation()
     {
         return $this->belongsToMany(Representation::class);
@@ -84,5 +80,44 @@ class User extends \TCG\Voyager\Models\User
         $regex = "/^\S*(?=\S{8,})(?=\S*[a-z])(?=\S*[A-Z])(?=\S*[\d])\S*$/";
 
         return (preg_match($regex, $password));
+    }
+
+    /**
+     * verifyEmailIsNotPresentInDb method.
+     * Verifies if the given email is already present in DDB.
+     *
+     * @param string $email User's email from the Request $request
+     * @return bool true if no match found, false otherwise
+     */
+    public static function verifyEmailIsNotPresentInDb(string $email): bool
+    {
+        if (!is_null($email)) {
+            $user = User::where('email', '=', $email)->first();
+
+            if (is_null($user)) {
+                return true;
+            }
+
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * checkIfFieldsAreDifferent method.
+     * Checks if the user is using a different name/email than what is set in the DDB.
+     *
+     * @param User $user the user
+     * @param string $email the email from the Modify form
+     * @param string $name the name from the Modify form
+     * @return bool true if the user is using a different name || email, false if any of the two is the same
+     */
+    public static function checkIfFieldsAreDifferent(User $user, string $email, string $name): bool
+    {
+        $differentMail = $user->email !== $email;
+        $differentName = $user->name !== $name;
+
+        return ($differentMail || $differentName);
     }
 }
