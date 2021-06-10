@@ -3,10 +3,16 @@
 @section('content')
     <h1>Modify your profile</h1>
     <h6>Please fill in the fields you wish to edit.</h6>
+    <!-- Error message -->
+    @if (session()->has('error'))
+        <div class="alert alert-danger">
+            {{ session()->get('error') }}
+        </div>
+    @endif
 
     <form action="{{ route('user.update', Auth::user()->id) }}" method="post" autocomplete="off">
-        @csrf
-        <!-- Name -->
+    @csrf
+    <!-- Name -->
         <label id="name_label" for="name">Name</label>
         <input type="text" name="name" id="name" autocomplete="off" placeholder="{{ Auth::user()->name }}">
         <br>
@@ -27,6 +33,6 @@
         <br>
 
         <!-- Submit -->
-        <button type="submit">Send</button>
+        <button type="submit" name="submit" value="isSent">Send</button>
     </form>
 @endsection
