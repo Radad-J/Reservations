@@ -48,6 +48,7 @@
     <div class="row pt-5">
         <div class="col-lg-8 mx-auto">
             <form  action="{{ route('show.order') }}" method="POST">
+            @method('post')
             @csrf
                 <div class="input-group-append">
                     <button class="button" name="field" value="title">Title</button>
