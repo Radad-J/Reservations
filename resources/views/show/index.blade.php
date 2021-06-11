@@ -59,13 +59,18 @@
             </form>
         </div>
 
-        <div class="col-6 mx-auto position-absolute" style="right:-14rem">
+        <div class="col-6 mx-auto position-absolute" style="right:0rem">
             <form action="{{ route('show.order') }}" method="POST">
                 @method('post')
                 @csrf
                 <div class="row">
                     <div class="col-2">
+                        <p>Sort by :</p></div>
+                    <div class="col-2">
                         <button class="button" name="field" value="title">Title</button>
+                    </div>
+                    <div class="col-2">
+                        <p>or</p>
                     </div>
                     <div class="col-2">
                         <button class="button" name="field" value="price">Price</button>
