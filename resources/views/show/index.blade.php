@@ -54,7 +54,7 @@
                 <div class="input-group-append">
                     <button class="button" name="filterType" value="bookable"> Bookable now! <i
                             class="fas fa-filter"></i></button>
-                        <button class="button" name="filterType" value="all"> All <i class="fas fa-eye"></i></button>
+                    <button class="button" name="filterType" value="all"> All <i class="fas fa-eye"></i></button>
                 </div>
             </form>
         </div>
