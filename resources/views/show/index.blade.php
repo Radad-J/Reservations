@@ -26,7 +26,7 @@
 
     @error("orderType")
     <div class="alert alert-danger">
-        Vous devez selectionner une méthode de tri
+        No sort method selected, please select a sort method.
     </div>
     @enderror
     <div class="row pt-5">
