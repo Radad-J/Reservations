@@ -75,17 +75,17 @@ border: 1px solid rgba( 255, 255, 255, 0.18 );" href="{{route('user.modify', Aut
                                                 <table>
                                                     <thead>
                                                     <tr>
-                                                        <th>Nom du spectacle</th>
-                                                        <th>Lieu</th>
-                                                        <th>Date et heure</th>
-                                                        <th>Nombre de place</th>
+                                                        <th>Show</th>
+                                                        <th>Location</th>
+                                                        <th>When</th>
+                                                        <th>Seat</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>
                                                     @foreach($bookings as $booking)
                                                         <tr>
                                                             <td>{{ $booking->representation->show->title }}</td>
-                                                            <td>{{ $booking->representation->location->address }} à {{ $booking->representation->location->locality->postal_code }} 
+                                                            <td>{{ $booking->representation->location->address }} at {{ $booking->representation->location->locality->postal_code }} 
                                                             {{ $booking->representation->location->locality->locality }}</td>
                                                             <td>{{ $booking->representation->when }}</td>
                                                             <td>{{ $booking->places }}</td>
