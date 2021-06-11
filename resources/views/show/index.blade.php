@@ -65,6 +65,14 @@
                 @csrf
                 <div class="row">
                     <div class="col-2">
+                        <label for="asc"><i class="fas fa-sort-alpha-up"></i></label>
+                        <input class="custombtn1" type="radio" name="orderType" id="asc" value="asc">
+                    </div>
+                    <div class="col-2">
+                        <label for="desc"><i class="fas fa-sort-alpha-down-alt"></i></label>
+                        <input type="radio" class="custombtn2" name="orderType" id="desc" value="desc">
+                    </div>
+                    <div class="col-2">
                         <p>Sort by :</p></div>
                     <div class="col-2">
                         <button class="button" name="field" value="title">Title</button>
@@ -75,15 +83,6 @@
                     <div class="col-2">
                         <button class="button" name="field" value="price">Price</button>
                     </div>
-                    <div class="col-2">
-                        <label for="asc"><i class="fas fa-sort-alpha-up"></i></label>
-                        <input class="custombtn1" type="radio" name="orderType" id="asc" value="asc">
-                    </div>
-                    <div class="col-2">
-                        <label for="desc"><i class="fas fa-sort-alpha-down-alt"></i></label>
-                        <input type="radio" class="custombtn2" name="orderType" id="desc" value="desc">
-                    </div>
-
                 </div>
             </form>
         </div>
